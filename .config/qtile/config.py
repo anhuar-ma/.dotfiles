@@ -26,6 +26,8 @@ terminal = "alacritty"
 # █░█ ██▄ ░█░ █▄█ █ █░▀█ █▄▀ ▄█
 
 
+def go_to_group(qtile, index):
+    qtile.current_group.use_layout(index)
 
 
 keys = [
@@ -74,11 +76,10 @@ keys = [
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 10%-"), desc='brightness Down'),
     Key([mod],"e", lazy.spawn("thunar"), desc='file manager'),
 	Key([mod], "h", lazy.spawn("roficlip"), desc='clipboard'),
-    Key([mod, "shift"], "s", lazy.spawn("flameshot gui"), desc='Screenshot'),
-    Key([mod], "s", lazy.spawn("brave"), desc='launche Brave-Browser'),
-    Key([mod], "t", lazy.spawn("rofi -show window"), desc='window switcher'),
-    #Key([mod], "f", lazy.window.toggle_maximize()),
-    Key([mod], "m", lazy.window.toggle_minimize()),
+    Key([mod], "s", lazy.spawn("flameshot gui"), desc='Screenshot'),
+    Key([mod], "t", lazy.spawn("rofi -show windowcd"), desc='window switcher'),
+    Key([mod], "m", lazy.window.toggle_minimize(), desc="Toggle maximize"),
+    Key([mod], "f", lazy.window.toggle_maximize(), desc="Toggle maximize"),
 ]
 
 
@@ -192,6 +193,20 @@ screens = [
                     background='#282738',
                 ),
 
+
+                widget.Image(
+                    filename='~/.config/qtile/Assets/launch_Icon.png',
+                    margin=2,
+                    background='#282738',
+                    mouse_callbacks={"Button1":power},
+                ),
+
+
+                widget.Image(
+                    filename='~/.config/qtile/Assets/6.png',
+                ),
+
+
                 widget.GroupBox(
                     fontsize=24,
                     borderwidth=3,
@@ -274,14 +289,16 @@ screens = [
                     fontsize=13,
 
                 ),
-
                 widget.Pomodoro(
-                     background = '#353446',
+                    background ='#353446',
                     font='JetBrains Mono Bold',
                     foreground='#CAA9E0',
                     fontsize=13,
-                    length_pomodori=50
-                    ),
+                    length_pomodori=50,
+                    length_short_break=10,
+
+                ),
+
                 widget.Image(
                     filename='~/.config/qtile/Assets/3.png',
                 ),
@@ -432,6 +449,21 @@ screens = [
                     fontsize=13,
                 ),
 
+
+                widget.Image(
+                    filename='~/.config/qtile/Assets/5.png',
+                    background='#353446',
+                ),
+
+
+                widget.Image(
+                    filename='~/.config/qtile/Assets/Misc/clock.png',
+                    background='#282738',
+                    margin_y=6,
+                    margin_x=5,
+                ),
+
+
                 widget.Clock(
                     format='%I:%M %p',
                     background='#282738',
@@ -450,9 +482,9 @@ screens = [
 
             ],
             30,
-            border_color = '#ff0019',
-            border_width = [0,0,0,0],
-            margin = [0,0,0,0],
+            border_color = '#282738',
+            #border_width = [0,0,0,0],
+            #margin = [15,60,6,60],
 
         ),
     ),
