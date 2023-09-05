@@ -46,7 +46,7 @@ keys = [
     Key([mod, "shift"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "shift"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-    #Key([mod], "f", lazy.window.toggle_fullscreen()),
+    Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key(
         [mod, "shift"],
         "Return",
@@ -74,11 +74,9 @@ keys = [
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 10%-"), desc='brightness Down'),
     Key([mod],"e", lazy.spawn("thunar"), desc='file manager'),
 	Key([mod], "h", lazy.spawn("roficlip"), desc='clipboard'),
-    Key([mod, "shift"], "s", lazy.spawn("flameshot gui"), desc='Screenshot'),
-    Key([mod], "s", lazy.spawn("brave"), desc='launche Brave-Browser'),
+    Key([mod], "s", lazy.spawn("flameshot gui"), desc='Screenshot'),
     Key([mod], "t", lazy.spawn("rofi -show window"), desc='window switcher'),
-    #Key([mod], "f", lazy.window.toggle_maximize()),
-    Key([mod], "m", lazy.window.toggle_minimize()),
+
 ]
 
 
@@ -128,36 +126,36 @@ layouts = [
 	    border_width=0,
     ),
 
-#     layout.Floating(	border_focus='#1F1D2E',
-# 	    border_normal='#1F1D2E',
-# 	    margin=10,
-# 	    border_width=0,
-# 	),
-#     # Try more layouts by unleashing below layouts
-#    #  layout.Stack(num_stacks=2),
-#    #  layout.Bsp(),
-#      layout.Matrix(	border_focus='#1F1D2E',
-# 	    border_normal='#1F1D2E',
-# 	    margin=10,
-# 	    border_width=0,
-# 	),
-#      layout.MonadTall(	border_focus='#1F1D2E',
-# 	    border_normal='#1F1D2E',
-#         margin=10,
-# 	    border_width=0,
-# 	),
-#     layout.MonadWide(	border_focus='#1F1D2E',
-# 	    border_normal='#1F1D2E',
-# 	    margin=10,
-# 	    border_width=0,
-# 	),
-#    #  layout.RatioTile(),
-#      layout.Tile(	border_focus='#1F1D2E',
-# 	    border_normal='#1F1D2E',
-#     ),
-#    #  layout.TreeTab(),
-#    #  layout.VerticalTile(),
-#    #  layout.Zoomy(),
+    layout.Floating(	border_focus='#1F1D2E',
+	    border_normal='#1F1D2E',
+	    margin=10,
+	    border_width=0,
+	),
+    # Try more layouts by unleashing below layouts
+   #  layout.Stack(num_stacks=2),
+   #  layout.Bsp(),
+     layout.Matrix(	border_focus='#1F1D2E',
+	    border_normal='#1F1D2E',
+	    margin=10,
+	    border_width=0,
+	),
+     layout.MonadTall(	border_focus='#1F1D2E',
+	    border_normal='#1F1D2E',
+        margin=10,
+	    border_width=0,
+	),
+    layout.MonadWide(	border_focus='#1F1D2E',
+	    border_normal='#1F1D2E',
+	    margin=10,
+	    border_width=0,
+	),
+   #  layout.RatioTile(),
+     layout.Tile(	border_focus='#1F1D2E',
+	    border_normal='#1F1D2E',
+    ),
+   #  layout.TreeTab(),
+   #  layout.VerticalTile(),
+   #  layout.Zoomy(),
 ]
 
 
@@ -191,6 +189,20 @@ screens = [
 				widget.Spacer(length=15,
                     background='#282738',
                 ),
+
+
+                widget.Image(
+                    filename='~/.config/qtile/Assets/launch_Icon.png',
+                    margin=2,
+                    background='#282738',
+                    mouse_callbacks={"Button1":power},
+                ),
+
+
+                widget.Image(
+                    filename='~/.config/qtile/Assets/6.png',
+                ),
+
 
                 widget.GroupBox(
                     fontsize=24,
@@ -275,13 +287,7 @@ screens = [
 
                 ),
 
-                widget.Pomodoro(
-                     background = '#353446',
-                    font='JetBrains Mono Bold',
-                    foreground='#CAA9E0',
-                    fontsize=13,
-                    length_pomodori=50
-                    ),
+
                 widget.Image(
                     filename='~/.config/qtile/Assets/3.png',
                 ),
@@ -432,6 +438,21 @@ screens = [
                     fontsize=13,
                 ),
 
+
+                widget.Image(
+                    filename='~/.config/qtile/Assets/5.png',
+                    background='#353446',
+                ),
+
+
+                widget.Image(
+                    filename='~/.config/qtile/Assets/Misc/clock.png',
+                    background='#282738',
+                    margin_y=6,
+                    margin_x=5,
+                ),
+
+
                 widget.Clock(
                     format='%I:%M %p',
                     background='#282738',
@@ -450,9 +471,9 @@ screens = [
 
             ],
             30,
-            border_color = '#ff0019',
+            border_color = '#282738',
             border_width = [0,0,0,0],
-            margin = [0,0,0,0],
+            margin = [15,60,6,60],
 
         ),
     ),
