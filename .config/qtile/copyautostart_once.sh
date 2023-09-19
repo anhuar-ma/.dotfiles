@@ -2,7 +2,7 @@
 
 # Apply wallpaper using wal
 #wal -i 282738 -i ~/Wallpaper/Aesthetic2.png &&
-wal -i ~/Pictures/casaplaya.jpg &&
+#wal -i ~/Pictures/dragon.jpg &&
 
 # Start picom
 dunst &
