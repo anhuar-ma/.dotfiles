@@ -467,7 +467,7 @@ screens = [
 
 
                 widget.Clock(
-                    format='%I:%M:%S %p    %d/%b/%y',
+                    format='%I:%M:%S %p    %d-%b-%y',
                     background='#282738',
                     foreground='#CAA9E0',
                     font="JetBrains Mono Bold",
