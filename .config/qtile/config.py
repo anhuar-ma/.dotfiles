@@ -119,9 +119,10 @@ for i in groups:
 
 
 layouts = [
-    layout.Columns( margin= [10,10,10,10], border_focus='#1F1D2E',
+    layout.Columns( margin= [8, 8, 8, 8], border_focus='#1F1D2E',
 	    border_normal='#1F1D2E',
         border_width=0,
+        fair=True,
     ),
 
     layout.Max(	border_focus='#1F1D2E',

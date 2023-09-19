@@ -26,6 +26,8 @@ terminal = "alacritty"
 # █░█ ██▄ ░█░ █▄█ █ █░▀█ █▄▀ ▄█
 
 
+def go_to_group(qtile, index):
+    qtile.current_group.use_layout(index)
 
 
 keys = [
@@ -46,7 +48,7 @@ keys = [
     Key([mod, "shift"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "shift"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-    Key([mod], "f", lazy.window.toggle_fullscreen()),
+    #Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key(
         [mod, "shift"],
         "Return",
@@ -74,9 +76,11 @@ keys = [
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 10%-"), desc='brightness Down'),
     Key([mod],"e", lazy.spawn("thunar"), desc='file manager'),
 	Key([mod], "h", lazy.spawn("roficlip"), desc='clipboard'),
-    Key([mod], "s", lazy.spawn("flameshot gui"), desc='Screenshot'),
+    Key([mod], "s", lazy.spawn("brave"), desc='launch brave'),
+    Key([mod, "shift"], "s", lazy.spawn("flameshot gui"), desc='Screenshot'),
     Key([mod], "t", lazy.spawn("rofi -show windowcd"), desc='window switcher'),
-
+    Key([mod], "m", lazy.window.toggle_minimize(), desc="Toggle maximize"),
+    Key([mod], "f", lazy.window.toggle_maximize(), desc="Toggle maximize"),
 ]
 
 
@@ -115,9 +119,10 @@ for i in groups:
 
 
 layouts = [
-    layout.Columns( margin= [10,10,10,10], border_focus='#1F1D2E',
+    layout.Columns( margin= [8, 8, 8, 8], border_focus='#1F1D2E',
 	    border_normal='#1F1D2E',
         border_width=0,
+        fair=True,
     ),
 
     layout.Max(	border_focus='#1F1D2E',
@@ -462,7 +467,7 @@ screens = [
 
 
                 widget.Clock(
-                    format='%I:%M %p',
+                    format='%I:%M:%S %p    %d/%b/%y',
                     background='#282738',
                     foreground='#CAA9E0',
                     font="JetBrains Mono Bold",
