@@ -184,7 +184,9 @@ def power():
 # █▄▄ ▄▀█ █▀█
 # █▄█ █▀█ █▀▄
 
-
+#purple like color='#CAA9E0'
+color_bar = '#000000'
+color_text= '#FF009C'
 
 screens = [
 
@@ -192,20 +194,15 @@ screens = [
         top=bar.Bar(
             [
 				widget.Spacer(length=15,
-                    background='#282738',
+                    background=color_bar,
                 ),
 
 
                 widget.Image(
                     filename='~/.config/qtile/Assets/launch_Icon.png',
                     margin=2,
-                    background='#282738',
+                    background=color_bar,
                     mouse_callbacks={"Button1":power},
-                ),
-
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/6.png',
                 ),
 
 
@@ -214,113 +211,104 @@ screens = [
                     borderwidth=3,
                     highlight_method='block',
                     active='#CAA9E0',
-                    block_highlight_text_color="#91B1F0",
+                    block_highlight_text_color=color_text,
                     highlight_color='#4B427E',
                     inactive='#282738',
                     foreground='#4B427E',
-                    background='#353446',
-                    this_current_screen_border='#353446',
-                    this_screen_border='#353446',
-                    other_current_screen_border='#353446',
-                    other_screen_border='#353446',
-                    urgent_border='#353446',
+                    background=color_bar,
+                    this_current_screen_border=color_bar,
+                    this_screen_border=color_bar,
+                    other_current_screen_border=color_bar,
+                    other_screen_border=color_bar,
+                    urgent_border=color_bar,
                     rounded=True,
                     disable_drag=True,
                  ),
 
 
                 widget.Spacer(
-                    length=8,
-                    background='#353446',
+                    length=16,
+                    background=color_bar,
                 ),
-
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/1.png',
-                ),
-
 
                 widget.Image(
                     filename='~/.config/qtile/Assets/layout.png',
-                    background="#353446"
+                    background=color_bar,
                 ),
 
 
                 widget.CurrentLayout(
-                    background='#353446',
-                    foreground='#CAA9E0',
+                    background=color_bar,
+                    foreground=color_text,
                     fmt='{}',
                     font="JetBrains Mono Bold",
                     fontsize=13,
                 ),
 
 
-                widget.Image(
-                    filename='~/.config/qtile/Assets/5.png',
+                widget.Spacer(
+                    length=16,
+                    background=color_bar,
                 ),
-
 
                 widget.Image(
                     filename='~/.config/qtile/Assets/search.png',
                     margin=2,
-                    background='#282738',
+                    background=color_bar,
                     mouse_callbacks={"Button1": search},
                 ),
 
                 widget.TextBox(
                     fmt='Search',
-                    background='#282738',
+                    background=color_bar,
                     font="JetBrains Mono Bold",
                     fontsize=13,
-                    foreground='#CAA9E0',
+                    foreground=color_text,
                     mouse_callbacks={"Button1": search},
                 ),
 
 
-                widget.Image(
-                    filename='~/.config/qtile/Assets/4.png',
+                widget.Spacer(
+                    length=32,
+                    background=color_bar,
                 ),
 
 
                 widget.WindowName(
-                    background = '#353446',
+                    background =color_bar,
                     format = "{name}",
                     font='JetBrains Mono Bold',
-                    foreground='#CAA9E0',
+                    foreground=color_text,
                     empty_group_string = 'Desktop',
                     fontsize=13,
 
                 ),
                 widget.Pomodoro(
-                    background ='#353446',
+                    background ='#250000',
                     font='JetBrains Mono Bold',
-                    foreground='#CAA9E0',
+                    foreground='#FF5FDC',
                     fontsize=13,
+                    color_inactive='#FF004E',
                     length_pomodori=50,
                     length_short_break=10,
 
                 ),
 
-                widget.Image(
-                    filename='~/.config/qtile/Assets/3.png',
+                widget.Spacer(
+                    length=32,
+                    background=color_bar,
                 ),
 
 
                 widget.Systray(
-                    background='#282738',
+                    background=color_bar,
                     fontsize=2,
                 ),
 
 
                 widget.TextBox(
                     text=' ',
-                    background='#282738',
-                ),
-
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/6.png',
-                    background='#353446',
+                    background=color_bar,
                 ),
 
 
@@ -348,54 +336,42 @@ screens = [
 
                 widget.Image(
                     filename='~/.config/qtile/Assets/Misc/ram.png',
-                    background='#353446',
+                    background=color_bar,
                 ),
 
 
                 widget.Spacer(
                     length=-7,
-                    background='#353446',
+                    background=color_bar,
                 ),
 
 
                 widget.Memory(
-                    background='#353446',
+                    background=color_bar,
                     format='{MemUsed: .0f}{mm}',
-                    foreground='#CAA9E0',
+                    foreground=color_text,
                     font="JetBrains Mono Bold",
                     fontsize=13,
                     update_interval=5,
                 ),
 
-
-                # widget.Image(
-                # filename='~/.config/qtile/Assets/Drop2.png',
-                # ),
-
-
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/2.png',
-                ),
-
-
                 widget.Spacer(
-                    length=8,
-                    background='#353446',
+                    length=16,
+                    background=color_bar,
                 ),
 
 
                 widget.BatteryIcon(
                     theme_path='~/.config/qtile/Assets/Battery/',
-                    background='#353446',
+                    background=color_bar,
                     scale=1,
                 ),
 
 
                 widget.Battery(
                     font='JetBrains Mono Bold',
-                    background='#353446',
-                    foreground='#CAA9E0',
+                    background=color_bar,
+                    foreground=color_text,
                     format='{percent:2.0%}',
                     fontsize=13,
                     notification_timeout=14,
@@ -404,14 +380,9 @@ screens = [
                 ),
 
 
-                widget.Image(
-                    filename='~/.config/qtile/Assets/2.png',
-                ),
-
-
                 widget.Spacer(
                     length=8,
-                    background='#353446',
+                    background=color_bar,
                 ),
 
 
@@ -433,51 +404,69 @@ screens = [
                     font='JetBrainsMono Nerd Font',
                     theme_path='~/.config/qtile/Assets/Volume/',
                     emoji=True,
-                    fontsize=13,
-                    background='#353446',
+                    fontsize=8,
+                    background=color_bar,
                 ),
 
 
                 widget.Spacer(
                     length=-5,
-                    background='#353446',
+                    background=color_bar,
                     ),
 
 
                 widget.Volume(
                     font='JetBrains Mono Bold',
-                    background='#353446',
-                    foreground='#CAA9E0',
+                    background=color_bar,
+                    foreground=color_text,
                     fontsize=13,
                 ),
 
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/5.png',
-                    background='#353446',
-                ),
+                widget.Spacer(
+                    length=6,
+                    background=color_bar,
+                    ),
 
 
                 widget.Image(
                     filename='~/.config/qtile/Assets/Misc/clock.png',
-                    background='#282738',
+                    background=color_bar,
                     margin_y=6,
                     margin_x=5,
                 ),
 
 
                 widget.Clock(
-                    format='%I:%M:%S %p    %d/%b/%y',
-                    background='#282738',
-                    foreground='#CAA9E0',
+                    format='%I:%M:%S %p',
+                    background=color_bar,
+                    foreground=color_text,
                     font="JetBrains Mono Bold",
                     fontsize=13,
                 ),
 
+                widget.Spacer(
+                    length=6,
+                    background=color_bar,
+                    ),
+
+                widget.Image(
+                    filename='~/.config/qtile/Assets/Misc/calendar.png',
+                    background=color_bar,
+                    margin_y=6,
+                    margin_x=5,
+                ),
+
+                widget.Clock(
+                    format='%d-%b-%y',
+                    background=color_bar,
+                    foreground=color_text,
+                    font="JetBrains Mono Bold",
+                    fontsize=13,
+                ),
 
                 widget.Spacer(
-                    length=18,
-                    background='#282738',
+                    length=12,
+                    background=color_bar,
                 ),
 
 
