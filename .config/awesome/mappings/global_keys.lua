@@ -220,7 +220,7 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
   ),
   awful.key(
     { modkey, "Shift" },
-    "",
+    "s",
     function()
       awful.spawn(user_vars.screenshot_program)
     end,
@@ -330,9 +330,14 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
     end,
     { description = "Toggle keyboard layout", group = "System" }
   ),
+  awful.key({ modkey, "Control" }, "i",  awful.client.floating.toggle                     ,
+  {description = "toggle floating", group = "client"}),
+
+
+
   awful.key(
     { modkey },
-    "i",
+    "",
     function()
       awful.spawn.easy_async_with_shell(
         [[xprop | grep WM_CLASS | awk '{gsub(/"/, "", $4); print $4}']],
@@ -368,7 +373,7 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
   ),
   awful.key(
     { modkey, "Shift" },
-    "i",
+    "",
     function()
       awful.spawn.easy_async_with_shell(
         [[xprop | grep WM_CLASS | awk '{gsub(/"/, "", $4); print $4}']],
@@ -400,4 +405,5 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
       )
     end
   )
+
 )

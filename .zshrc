@@ -11,6 +11,7 @@ export TERMINAL='alacritty'
 export BROWSER='firefox'
 export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 
+
 if [ -d "$HOME/.local/bin" ] ;
   then PATH="$HOME/.local/bin:$PATH"
 fi
@@ -31,13 +32,20 @@ autoload -Uz vcs_info
 precmd () { vcs_info }
 _comp_options+=(globdots)
 
+
+#zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+#export LS_COLORS
+#zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
 zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:*:*:*' menu select
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} 'ma=48;5;197;1'
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*:warnings' format "%B%F{red}No matches for:%f %F{magenta}%d%b"
-zstyle ':completion:*:descriptions' format '%F{yellow}[-- %d --]%f'
-zstyle ':vcs_info:*' formats ' %B%s-[%F{magenta}%f %F{yellow}%b%f]-'
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} '' 
+#zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} 'ma=33;5;197;1'
+#zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+#zstyle ':completion:*:warnings' format "%B%F{red}No matches for:%f %F{magenta}%d%b"
+#zstyle ':completion:*:descriptions' format '%F{yellow}[-- %d --]%f'
+#zstyle ':vcs_info:*' formats ' %B%s-[%F{magenta}%f %F{yellow}%b%f]-'
 
 #  ┬ ┬┌─┐┬┌┬┐┬┌┐┌┌─┐  ┌┬┐┌─┐┌┬┐┌─┐
 #  │││├─┤│ │ │││││ ┬   │││ │ │ └─┐
@@ -82,7 +90,7 @@ setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
 
 #PS1='%B%F{blue}%f%b  %B%F{magenta}%n%f%b $(dir_icon)  %B%F{red}%~%f%b${vcs_info_msg_0_} %(?.%B%F{green}.%F{red})%f%b '
 #PS1='%B%F{#ff0000}%~%f%b${vcs_info_msg_0_} %(?.%B%F{#00ff80}.%F{red})%f%b '
-PS1='%B%F{#ffb600}%~%f%b %(?.%B%F{#ff0000}🔥%B%F{#0091FF}🌊%B%F{#00FF00}🍀.%F{red})%f%b '
+PS1='%B%F{#ffb600}%~%f%b %(?.%B%F{#ff0000}🔥%B%F{#00FF00}🍀%B%F{#0091FF}🌊.%F{red})%f%b '
 
 #  ┌─┐┬  ┬ ┬┌─┐┬┌┐┌┌─┐
 #  ├─┘│  │ ││ ┬││││└─┐

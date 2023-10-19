@@ -8,10 +8,6 @@ local beautiful = require("beautiful")
 local ruled = require("ruled")
 
 awful.rules.rules = {
-      {rule = { class = "Brave-browser" },
-
-properties = { opacity = 1, maximized = false, floating = false } },
-
   {
     rule = {},
     properties = {
@@ -46,10 +42,6 @@ properties = { opacity = 1, maximized = false, floating = false } },
     properties = { floating = false, titlebars_enabled = true }
   },
     
-  {rule = { class = "Brave-browser" },
-
-properties = { opacity = 1, maximized = false, floating = false } },
-
   {
     id = "titlebar",
     rule_any = {
@@ -66,7 +58,7 @@ awful.spawn.easy_async_with_shell(
     ruled.client.append_rule {
       rule = { class = class },
       properties = {
-        floating = false 
+        floating = true 
       },
     }
   end

@@ -12,7 +12,7 @@ xinput set-prop ELAN0521:01\ 04F3:31B1\ Touchpad  340 0.4 & # set sensivility
 xinput set-prop ELAN0521:01\ 04F3:31B1\ Touchpad  371 1 & # middle click
 setxkbmap -layout us -variant colemak_dh -option caps:capslock &
 numlockx &
-systemctl --user start plasma-powerdevil.service & 
+#systemctl --user start plasma-powerdevil.service & 
 #xrandr --output eDP-1 --mode 1920x1080 --rate 60 &
 ## to set the lock screen
 xss-lock ~/.config/qtile/runbetterlockscreen.sh &
