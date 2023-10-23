@@ -247,6 +247,7 @@ client.connect_signal(
         --     awful.titlebar.hide(c, 'bottom')
     -- end
 
+
   end
 )
 
@@ -255,7 +256,7 @@ client.connect_signal(
 client.connect_signal(
   'property::floating',
   function(c)
-    if c.floating or (c.floating and c.maximized) then
+    if c.floating and not c.maximized then 
       draw_titlebar(c)
       awful.titlebar.show(c, 'left')
       awful.titlebar.hide(c, 'right')
