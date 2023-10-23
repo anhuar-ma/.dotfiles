@@ -36,7 +36,7 @@ awful.screen.connect_for_each_screen(
   --s.kblayout = require("src.widgets.kblayout")(s)
   s.taglist = require("src.widgets.taglist")(s)
   s.tasklist = require("src.widgets.tasklist")(s)
- -- s.cpu_freq = require("src.widgets.cpu_info")("freq", "average")
+  s.cpu_freq = require("src.widgets.cpu_info")("freq", "average")
 
   -- Add more of these if statements if you want to change
   -- the modules/widgets per screen.
@@ -51,7 +51,7 @@ awful.screen.connect_for_each_screen(
 
     require("crylia_bar.left_bar")(s, { s.layoutlist, s.systray, s.taglist })
     require("crylia_bar.center_bar")(s, { s.tasklist })
-    require("crylia_bar.right_bar")(s, {s.battery,s.ram_info, s.audio, s.date, s.clock})
+    require("crylia_bar.right_bar")(s, {s.battery,s.cpu_freq,s.ram_info, s.audio, s.date, s.clock})
    -- require("crylia_bar.dock")(s, user_vars.dock_programs)
   end
 

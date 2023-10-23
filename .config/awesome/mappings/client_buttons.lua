@@ -18,8 +18,10 @@ return gears.table.join(
   end),
 
     -- Enable sloppy focus, so that focus follows mouse.
-    client.connect_signal("mouse::enter", function(c)
+   -- client.connect_signal("mouse::enter", function(c)
+     --   c:activate { context = "mouse_enter", raise = false }
+    --end),
+    client.connect_signal("mouse::move", function(c)
         c:activate { context = "mouse_enter", raise = false }
     end)
-
 )

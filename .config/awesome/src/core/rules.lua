@@ -39,9 +39,8 @@ awful.rules.rules = {
         "pop-up"
       }
     },
-    properties = { floating = false, titlebars_enabled = true }
+    properties = { floating = true, titlebars_enabled = true }
   },
-    
   {
     id = "titlebar",
     rule_any = {
@@ -58,7 +57,7 @@ awful.spawn.easy_async_with_shell(
     ruled.client.append_rule {
       rule = { class = class },
       properties = {
-        floating = true 
+        floating = true
       },
     }
   end

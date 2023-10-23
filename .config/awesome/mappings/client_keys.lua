@@ -4,6 +4,19 @@ local gears = require("gears")
 
 local modkey = user_vars.modkey
 
+-- Function to kill the current window under the mouse pointer
+function kill_current_window()
+    -- Get the client (window) under the mouse pointer
+    local c = awful.mouse.client_under_pointer()
+
+    -- Check if a client was found
+    if c then
+        -- Kill (close) the client
+        c:kill()
+    end
+end
+
+
 return gears.table.join(
   awful.key(
     { modkey },
@@ -17,8 +30,8 @@ return gears.table.join(
   awful.key(
     { modkey },
     "q",
-    function(c)
-      c:kill()
+    function()
+        kill_current_window()
     end,
     { description = "Close focused client", group = "Client" }
   ),

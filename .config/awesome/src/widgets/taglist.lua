@@ -76,30 +76,30 @@ local list_update = function(widget, buttons, label, data, objects)
       tag_widget:set_bg("#3A475C")
     end
 
-    -- Set the icon for each client
-    for _, client in ipairs(object:clients()) do
-      tag_widget.container.margin:set_right(0)
-      local icon = wibox.widget {
-        {
-          id = "icon_container",
-          {
-            id = "icon",
-            resize = true,
-            widget = wibox.widget.imagebox
-          },
-          widget = wibox.container.place
-        },
-        forced_width = dpi(33),
-        margins = dpi(6),
-        widget = wibox.container.margin
-      }
-      icon.icon_container.icon:set_image(Get_icon(user_vars.icon_theme, client))
-      tag_widget.container:setup({
-        icon,
-        strategy = "exact",
-        layout = wibox.container.constraint,
-      })
-    end
+    -- -- Set the icon for each client
+    -- for _, client in ipairs(object:clients()) do
+    --   tag_widget.container.margin:set_right(0)
+    --   local icon = wibox.widget {
+    --     {
+    --       id = "icon_container",
+    --       {
+    --         id = "icon",
+    --         resize = true,
+    --         widget = wibox.widget.imagebox
+    --       },
+    --       widget = wibox.container.place
+    --     },
+    --     forced_width = dpi(4),
+    --     margins = dpi(6),
+    --     widget = wibox.container.margin
+    --   }
+    --   icon.icon_container.icon:set_image(Get_icon(user_vars.icon_theme, client))
+    --   tag_widget.container:setup({
+    --     icon,
+    --     strategy = "exact",
+    --     layout = wibox.container.constraint,
+    --   })
+    -- end
 
     --#region Hover_signal
     local old_wibox, old_cursor, old_bg

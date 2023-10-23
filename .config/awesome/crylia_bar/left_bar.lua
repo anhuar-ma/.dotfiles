@@ -16,17 +16,17 @@ return function(s, widgets)
     ontop = false,
     bg = color["Grey900"],
     visible = true,
-    maximum_width = dpi(650),
+    maximum_width = dpi(850),
     placement = function(c) awful.placement.top_left(c, { margins = dpi(-1) }) end,
     shape = function(cr, width, height)
       gears.shape.rounded_rect(cr, width, height, 5)
     end
   }
-
+--how near can window be 
   top_left:struts {
     top = 10 
   }
-
+--height of widget
   local function prepare_widgets(widgets)
     local layout = {
       forced_height = 40,
@@ -69,8 +69,8 @@ return function(s, widgets)
   end
 
   top_left:setup {
-    prepare_widgets(widgets),
     nil,
+    prepare_widgets(widgets),
     nil,
     layout = wibox.layout.fixed.horizontal
   }
