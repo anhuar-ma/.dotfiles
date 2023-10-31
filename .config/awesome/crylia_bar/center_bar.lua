@@ -16,7 +16,7 @@ return function(s, widgets)
     ontop = false,
     bg = color["Grey900"],
     visible = true,
-    maximum_width = dpi(500),
+    maximum_width = dpi(300),
     placement = function(c) awful.placement.top(c, { margins = dpi(-1) }) end,
     shape = function(cr, width, height)
       gears.shape.rounded_rect(cr, width, height, 5)

@@ -220,33 +220,8 @@ client.connect_signal(
 --what happens with , i don't know yet, but it goes together with maximized and floating
 --like what a window does when you change it
 client.connect_signal(
-  "request::titlebars",
+  'request::titlebars',
   function(c)
-    -- if c.floating and not c.maximized then
-    --   Theme.titlebar_maximized_button_normal = icondir .. "unmaximize.svg"
-    --   Theme.titlebar_maximized_button_active = icondir .. "unmaximize.svg"
-    --   Theme.titlebar_maximized_button_inactive = icondir .. "unmaximize.svg"
-    --   draw_titlebar(c)
-    --  elseif c.floating then
-    --   Theme.titlebar_maximized_button_normal = icondir .. "maximize.svg"
-    --   Theme.titlebar_maximized_button_active = icondir .. "maximize.svg"
-    --   Theme.titlebar_maximized_button_inactive = icondir .. "maximize.svg"
-    --   draw_titlebar(c)   
-    --  elseif c.maximized then
-    --   awful.titlebar.hide(c, 'left')
-    --   awful.titlebar.hide(c, 'right')
-    --   awful.titlebar.hide(c, 'top')
-    --   awful.titlebar.hide(c, 'bottom')
-
-        -- if not c.minimized then 
-        --   draw_titlebar(c)
-        -- else
-        --     awful.titlebar.hide(c, 'left')
-        --     awful.titlebar.hide(c, 'right')
-        --     awful.titlebar.hide(c, 'top')
-        --     awful.titlebar.hide(c, 'bottom')
-    -- end
-
 
   end
 )
@@ -256,13 +231,14 @@ client.connect_signal(
 client.connect_signal(
   'property::floating',
   function(c)
-    if c.floating and not c.maximized then 
+
+    if c.floating and not c.maximized and not c. fullscreen then
       draw_titlebar(c)
       awful.titlebar.show(c, 'left')
       awful.titlebar.hide(c, 'right')
       awful.titlebar.hide(c, 'top')
       awful.titlebar.hide(c, 'bottom')
-    else
+    else   
       awful.titlebar.hide(c, 'left')
       awful.titlebar.hide(c, 'right')
       awful.titlebar.hide(c, 'top')
