@@ -4,8 +4,16 @@ local gears = require("gears")
 local globalkeys = require("../mappings/global_keys")
 local modkey = user_vars.modkey
 
+
+local function numpad_key_action(number)
+    naughty.notify({ text = "Numpad " .. number .. " pressed" }) -- Replace this with your action
+end
+
+
 for i = 1, 9 do
   globalkeys = gears.table.join(globalkeys,
+
+
 
     -- View tag only
     awful.key(
@@ -21,19 +29,9 @@ for i = 1, 9 do
       end,
       { description = "View Tag " .. i, group = "Tag" }
     ),
-    -- Brings the window over without chaning the tag, reverts automatically on tag change
-    awful.key(
-      { modkey, "Control" },
-      "#" .. i + 9,
-      function()
-        local screen = awful.screen.focused()
-        local tag = screen.tags[i]
-        if tag then
-          awful.tag.viewtoggle(tag)
-        end
-      end,
-      { description = "Toggle Tag " .. i, group = "Tag" }
-    ),
+
+
+
     -- Brings the window over without chaning the tag, reverts automatically on tag change
     awful.key(
       { modkey, "Shift" },
@@ -64,4 +62,9 @@ for i = 1, 9 do
     )
   )
 end
+
+
+
+
+
 root.keys(globalkeys)

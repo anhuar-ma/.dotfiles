@@ -12,7 +12,7 @@ awful.screen.connect_for_each_screen(
   -- Create 9 tags
   awful.layout.layouts = user_vars.layouts
   awful.tag(
-    { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+    {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "1", "1", "1", "1", "1", "1", "1", "1", "1"},
     s,
     user_vars.layouts[1]
   )
@@ -37,7 +37,7 @@ awful.screen.connect_for_each_screen(
   s.taglist = require("src.widgets.taglist")(s)
   s.tasklist = require("src.widgets.tasklist")(s)
   s.cpu_freq = require("src.widgets.cpu_info")("freq", "average")
-
+ -- s.pomodoro = require("")(s)
   -- Add more of these if statements if you want to change
   -- the modules/widgets per screen.
   if s.index == 1 then
@@ -49,10 +49,10 @@ awful.screen.connect_for_each_screen(
     --s.network = require("src.widgets.network")()
     s.ram_info = require("src.widgets.ram_info")()
 
-    require("crylia_bar.left_bar")(s, { s.layoutlist, s.systray, s.taglist })
-    require("crylia_bar.center_bar")(s, { s.tasklist })
-    require("crylia_bar.right_bar")(s, {s.battery,s.cpu_freq,s.ram_info, s.audio, s.date, s.clock})
-   -- require("crylia_bar.dock")(s, user_vars.dock_programs)
+   require("crylia_bar.left_bar")(s, { s.layoutlist, s.systray, s.taglist})
+   require("crylia_bar.center_bar")(s, { s.tasklist })
+   require("crylia_bar.right_bar")(s, {s.battery,s.cpu_freq,s.ram_info, s.audio, s.date, s.clock})
+   --require("crylia_bar.dock")(s, user_vars.dock_programs)
   end
 
   if s.index == 2 then
@@ -67,3 +67,5 @@ end
 )
 
 awful.spawn.with_shell("~/.config/awesome/src/scripts/autostart_once.sh")
+
+

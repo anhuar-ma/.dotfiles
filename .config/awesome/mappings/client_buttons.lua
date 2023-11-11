@@ -4,7 +4,37 @@ local gears = require("gears")
 
 local modkey = user_vars.modkey
 
+-- Function to focus the client under the mouse cursor
+local function focus_client_under_mouse()
+    -- Get the mouse coordinates
+    local x, y = mouse.coords() 
+
+    -- Find the client (window) under the mouse cursor
+    local c = awful.mouse.client_under_pointer()
+
+    -- Check if a client was found
+    if c then
+        -- Focus the client
+        client.focus = c
+        c:raise()
+    end
+end
+
+-- Periodically check and focus the client under the mouse cursor
+local mouse_focus_timer = gears.timer {
+    timeout = 0.1, -- Adjust the timeout as needed (1 second in this example)
+    autostart = true,
+    callback = function()
+        focus_client_under_mouse()
+    end
+}
+
+
+
 return gears.table.join(
+
+
+
   awful.button({}, 1, function(c)
     c:emit_signal("request::activate", "mouse_click", { raise = true })
   end),
@@ -16,12 +46,21 @@ return gears.table.join(
     c:emit_signal("request::activate", "mouse_click", { raise = true })
     awful.mouse.client.resize(c)
   end),
+-- Connect the signal to focus the client under the mouse cursor
+client.connect_signal("mouse::enter", function(c)
+    -- This signal is emitted when the mouse enters a client's area
+    if c:isvisible() then
+        client.focus = c
+    end
+end)
+
+
+
+-- Periodically check and focus the client under the mouse cursor
 
     -- Enable sloppy focus, so that focus follows mouse.
    -- client.connect_signal("mouse::enter", function(c)
      --   c:activate { context = "mouse_enter", raise = false }
     --end),
-    client.connect_signal("mouse::move", function(c)
-        c:activate { context = "mouse_enter", raise = false }
-    end)
+
 )

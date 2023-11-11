@@ -114,6 +114,19 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
     end,
     { description = "Open terminal", group = "Applications" }
   ),
+
+     -- Show/Hide Wibox
+     awful.key({ modkey }, "b", function ()
+             for s in screen do
+                 s.mywibox.visible = not s.mywibox.visible
+                 if s.mybottomwibox then
+                     s.mybottomwibox.visible = not s.mybottomwibox.visible
+                 end
+            end
+         end,
+         {description = "toggle wibox", group = "awesome"}),
+
+
   awful.key(
     { modkey, "Control" },
     "r",
@@ -269,7 +282,7 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
       awful.spawn.easy_async_with_shell(
         "pkexec xfpm-power-backlight-helper --get-brightness",
         function(stdout)
-          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) + BACKLIGHT_SEPS), function(stdou2)
+          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) + 5 * BACKLIGHT_SEPS), function(stdou2)
 
           end)
           awesome.emit_signal("module::brightness_osd:show", true)
@@ -287,7 +300,7 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
       awful.spawn.easy_async_with_shell(
         "pkexec xfpm-power-backlight-helper --get-brightness",
         function(stdout)
-          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) - BACKLIGHT_SEPS), function(stdout2)
+          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) - 5 * BACKLIGHT_SEPS), function(stdout2)
 
           end)
           awesome.emit_signal("module::brightness_osd:show", true)

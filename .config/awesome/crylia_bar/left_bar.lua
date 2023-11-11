@@ -24,7 +24,7 @@ return function(s, widgets)
   }
 --how near can window be 
   top_left:struts {
-    top = 10 
+    top = 39 
   }
 --height of widget
   local function prepare_widgets(widgets)
