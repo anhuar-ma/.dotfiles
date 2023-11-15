@@ -77,6 +77,9 @@ Theme.hotkeys_description_font = user_vars.font.bold
 -- Icon directory path
 local layout_path = Theme_path .. "../assets/layout/"
 
+
+
+Theme.layout_fairv = color["White"]
 -- Here are the icons for the layouts defined, if you want to add more layouts go to main/layouts.lua
 Theme.layout_floating = layout_path .. "floating.svg"
 Theme.layout_tile = layout_path .. "tile.svg"

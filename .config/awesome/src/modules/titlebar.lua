@@ -182,16 +182,12 @@ local draw_titlebar = function(c)
   if c.type == 'normal' and not c.requests_no_titlebar then
     if c.class == 'Firefox' then
       create_titlebar(c, '#121212AA', 35)
-    elseif c.name == "brave-browser" then
-      create_titlebar(c, '#121212AA', 0)
     elseif c.name == "Steam" then
       create_titlebar(c, '#121212AA', 0)
     elseif c.name == "Settings" then
       create_titlebar(c, '#121212AA', 0)
     elseif c.class == "gcr-prompter" or c.class == "Gcr-prompter" then
       create_titlebar(c, '#121212AA', 0)
-    elseif c.name == "Brave" then
-      create_titlebar(c, '#121212AA', 35)
     else
       create_titlebar(c, '#121212AA', 35)
     end
@@ -199,46 +195,53 @@ local draw_titlebar = function(c)
     create_titlebar_dialog(c, '#121212AA', 35)
   end
 end
---what happens when you maximized a window
+
 client.connect_signal(
   "property::maximized",
   function(c)
-    if c.maximized or floating then
+    if c.maximized then
       Theme.titlebar_maximized_button_normal = icondir .. "unmaximize.svg"
       Theme.titlebar_maximized_button_active = icondir .. "unmaximize.svg"
       Theme.titlebar_maximized_button_inactive = icondir .. "unmaximize.svg"
-
-  elseif not c.minimized then
+    elseif not c.minimized then
       Theme.titlebar_maximized_button_normal = icondir .. "maximize.svg"
       Theme.titlebar_maximized_button_active = icondir .. "maximize.svg"
       Theme.titlebar_maximized_button_inactive = icondir .. "maximize.svg"
-   
-  end
+    end
   end
 )
 
---what happens with , i don't know yet, but it goes together with maximized and floating
---like what a window does when you change it
 client.connect_signal(
-  'request::titlebars',
+  "request::titlebars",
   function(c)
-
+    if c.maximized then
+      Theme.titlebar_maximized_button_normal = icondir .. "unmaximize.svg"
+      Theme.titlebar_maximized_button_active = icondir .. "unmaximize.svg"
+      Theme.titlebar_maximized_button_inactive = icondir .. "unmaximize.svg"
+    elseif not c.minimized then
+      Theme.titlebar_maximized_button_normal = icondir .. "maximize.svg"
+      Theme.titlebar_maximized_button_active = icondir .. "maximize.svg"
+      Theme.titlebar_maximized_button_inactive = icondir .. "maximize.svg"
+    end
+    if not c.floating or c.maximized then
+      awful.titlebar.hide(c, 'left')
+      awful.titlebar.hide(c, 'right')
+      awful.titlebar.hide(c, 'top')
+      awful.titlebar.hide(c, 'bottom')
+    end
   end
 )
-
---what happens when you make a window float
 
 client.connect_signal(
   'property::floating',
   function(c)
-
-    if c.floating and not c.maximized and not c. fullscreen then
+    if c.floating and not c.maximized and not c.fullscreen then
       draw_titlebar(c)
       awful.titlebar.show(c, 'left')
       awful.titlebar.hide(c, 'right')
       awful.titlebar.hide(c, 'top')
       awful.titlebar.hide(c, 'bottom')
-    else   
+    else
       awful.titlebar.hide(c, 'left')
       awful.titlebar.hide(c, 'right')
       awful.titlebar.hide(c, 'top')

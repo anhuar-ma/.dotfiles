@@ -3,6 +3,11 @@
 --------------------------------------------------------------------------------------------------------------
 -- Awesome Libs
 local awful = require("awful")
+local wibox = require("wibox")
+
+
+
+mytextclock = wibox.widget.textclock()
 
 awful.screen.connect_for_each_screen(
 -- For each screen this function is called once
@@ -12,60 +17,96 @@ awful.screen.connect_for_each_screen(
   -- Create 9 tags
   awful.layout.layouts = user_vars.layouts
   awful.tag(
-    {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "1", "1", "1", "1", "1", "1", "1", "1", "1"},
+    { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12" , "13", "14", "15", "16", "17", "18", "19", "20"},
     s,
     user_vars.layouts[1]
   )
+    -- Create a promptbox for each screen
+    s.mypromptbox = awful.widget.prompt()
 
-  require("src.modules.powermenu")(s)
-  -- TODO: rewrite calendar osd, maybe write an own inplementation
-  -- require("src.modules.calendar_osd")(s)
-  require("src.modules.volume_osd")(s)
-  require("src.modules.brightness_osd")(s)
-  require("src.modules.titlebar")
-  require("src.modules.volume_controller")(s)
+    -- Create an imagebox widget which will contain an icon indicating which layout we're using.
+    -- We need one layoutbox per screen.
+    s.mylayoutbox = awful.widget.layoutbox {
+        screen  = s,
+                fg = "#FFFFFF",
+        buttons = {
+            awful.button({ }, 1, function () awful.layout.inc( 1) end),
+            awful.button({ }, 3, function () awful.layout.inc(-1) end),
+            awful.button({ }, 4, function () awful.layout.inc(-1) end),
+            awful.button({ }, 5, function () awful.layout.inc( 1) end),
+        }
+    }
 
-  -- Widgets
+
+-- Create a taglist widget
+s.mytaglist = awful.widget.taglist {
+    screen  = s,
+    filter  = function(t, args)
+        return #t:clients() > 0
+    end,
+    buttons = {
+        awful.button({ }, 1, function(t) t:view_only() end),
+        awful.button({ modkey }, 1, function(t)
+            if client.focus then
+                client.focus:move_to_tag(t)
+            end
+        end),
+        awful.button({ }, 3, awful.tag.viewtoggle),
+        awful.button({ modkey }, 3, function(t)
+            if client.focus then
+                client.focus:toggle_tag(t)
+            end
+        end),
+        awful.button({ }, 4, function(t) awful.tag.viewprev(t.screen) end),
+        awful.button({ }, 5, function(t) awful.tag.viewnext(t.screen) end),
+    }
+}
+
+    -- @TASKLIST_BUTTON@
+    -- Create a tasklist widget
+    s.mytasklist = awful.widget.tasklist {
+        screen  = s,
+        filter  = awful.widget.tasklist.filter.currenttags,
+        buttons = {
+            awful.button({ }, 1, function (c)
+                c:activate { context = "tasklist", action = "toggle_minimization" }
+            end),
+            awful.button({ }, 3, function() awful.menu.client_list { theme = { width = 250 } } end),
+            awful.button({ }, 4, function() awful.client.focus.byidx(-1) end),
+            awful.button({ }, 5, function() awful.client.focus.byidx( 1) end),
+        }
+    }
+
   s.battery = require("src.widgets.battery")()
-  s.audio = require("src.widgets.audio")(s)
-  s.date = require("src.widgets.date")()
-  s.clock = require("src.widgets.clock")()
-  --s.bluetooth = require("src.widgets.bluetooth")()
-  s.layoutlist = require("src.widgets.layout_list")(s)
-  --s.powerbutton = require("src.widgets.power")()
-  --s.kblayout = require("src.widgets.kblayout")(s)
-  s.taglist = require("src.widgets.taglist")(s)
-  s.tasklist = require("src.widgets.tasklist")(s)
-  s.cpu_freq = require("src.widgets.cpu_info")("freq", "average")
- -- s.pomodoro = require("")(s)
-  -- Add more of these if statements if you want to change
-  -- the modules/widgets per screen.
-  if s.index == 1 then
-    s.systray = require("src.widgets.systray")(s)
-    --s.cpu_usage = require("src.widgets.cpu_info")("usage")
-    --s.cpu_temp = require("src.widgets.cpu_info")("temp")
-    --s.gpu_usage = require("src.widgets.gpu_info")("usage")
-    --s.gpu_temp = require("src.widgets.gpu_info")("temp")
-    --s.network = require("src.widgets.network")()
-    s.ram_info = require("src.widgets.ram_info")()
+    -- @DOC_WIBAR@
+    -- Create the wibox
+    s.mywibox = awful.wibar {
+        position = "top",
+        screen   = s,
+        bg = "#11112D", -- Set the background color to red
+        -- @DOC_SETUP_WIDGETS@
+        widget   = {
+            layout = wibox.layout.align.horizontal,
+            { -- Left widgets
+                layout = wibox.layout.fixed.horizontal,
+               -- s.mylayoutbox,
+                s.mytaglist,
+            },
+            { -- Middle widget (empty space)
+            layout  = wibox.layout.fixed.horizontal,
+            spacing = 1,  -- Adjust the spacing as needed
+            wibox.widget.textbox(' '), -- This is an empty space
+        },
+            { -- Right widgets
+                layout = wibox.layout.fixed.horizontal,
+                wibox.widget.systray(),
+                s.battery,
+                mytextclock,
+            },
+        }
+    }
+end)
 
-   require("crylia_bar.left_bar")(s, { s.layoutlist, s.systray, s.taglist})
-   require("crylia_bar.center_bar")(s, { s.tasklist })
-   require("crylia_bar.right_bar")(s, {s.battery,s.cpu_freq,s.ram_info, s.audio, s.date, s.clock})
-   --require("crylia_bar.dock")(s, user_vars.dock_programs)
-  end
 
-  if s.index == 2 then
-    s.network = require("src.widgets.network")()
-    s.ram_info = require("src.widgets.ram_info")()
-
-    require("crylia_bar.left_bar")(s, { s.layoutlist, s.taglist })
-    require("crylia_bar.center_bar")(s, { s.tasklist })
-    require("crylia_bar.right_bar")(s, { s.ram_info, s.audio, s.kblayout, s.network, s.date, s.clock, s.powerbutton })
-  end
-end
-)
 
 awful.spawn.with_shell("~/.config/awesome/src/scripts/autostart_once.sh")
-
-

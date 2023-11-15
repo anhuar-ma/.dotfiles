@@ -19,22 +19,22 @@ return function()
   local battery_widget = wibox.widget {
     {
       {
-        {
-          {
-            {
-              id = "icon",
-              image = gears.color.recolor_image(icondir .. "battery-unknown.svg", "#212121"),
-              widget = wibox.widget.imagebox,
-              resize = false
-            },
-            id = "icon_layout",
-            widget = wibox.container.place
-          },
-          id = "icon_margin",
-          top = dpi(2),
-          widget = wibox.container.margin
-        },
-        spacing = dpi(10),
+        --{
+          --{
+           -- {
+            --  id = "icon",
+           --   image = gears.color.recolor_image(icondir .. "battery-unknown.svg", "#212121"),
+           --   widget = wibox.widget.imagebox,
+           --   resize = false
+           -- },
+            --id = "icon_layout",
+            --widget = wibox.container.place
+          --},
+          --id = "icon_margin",
+          --top = dpi(2),
+          --widget = wibox.container.margin
+        --},
+        --spacing = dpi(10),
         {
           visible = false,
           align = 'center',
@@ -50,8 +50,8 @@ return function()
       right = dpi(8),
       widget = wibox.container.margin
     },
-    bg = color["Purple200"],
-    fg = color["Grey900"],
+    --bg = color["Purple200"],
+    --fg = color["Grey900"],
     shape = function(cr, width, height)
       gears.shape.rounded_rect(cr, width, height, 5)
     end,

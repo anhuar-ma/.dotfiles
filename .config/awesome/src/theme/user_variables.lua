@@ -43,9 +43,9 @@ user_vars = {
 
   -- Set your font with this format:
   font = {
-    regular = "JetBrainsMono Nerd Font, 14",
-    bold = "JetBrainsMono Nerd Font, bold 14",
-    extrabold = "JetBrainsMono Nerd Font, ExtraBold 14",
+    regular = "JetBrainsMono Nerd Font, 10",
+    bold = "JetBrainsMono Nerd Font, bold 10",
+    extrabold = "JetBrainsMono Nerd Font, ExtraBold 10",
     specify = "JetBrainsMono Nerd Font"
   },
 
@@ -56,7 +56,7 @@ user_vars = {
   modkey = "Mod4",
 
   -- place your wallpaper at this path with this name, you could also try to change the path
-  wallpaper = home .. "/.config/awesome/src/assets/MountainView.png",
+  wallpaper = home .. "/.config/awesome/src/assets/NightMountain.jpg",
 
   -- Naming scheme for the powermenu, userhost = "user@hostname", fullname = "Firstname Surname", something else ...
   namestyle = "userhost",

@@ -39,8 +39,8 @@ return function()
           id = "label",
           align = "center",
           valign = "center",
-          format = "%H:%M ",
-          refresh = 60,
+          format = "%H:%M:%S",
+          refresh = 1,
           widget = wibox.widget.textclock
         },
         id = "clock_layout",

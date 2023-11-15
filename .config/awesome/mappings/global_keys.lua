@@ -19,7 +19,13 @@ local function toggle_layout()
 end
 return gears.table.join(
 
-
+awful.key({ modkey }, "b",
+          function ()
+              myscreen = awful.screen.focused()
+              myscreen.mywibox.visible = not myscreen.mywibox.visible
+          end,
+          {description = "toggle statusbar"}
+),
 
 
 
@@ -114,19 +120,6 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
     end,
     { description = "Open terminal", group = "Applications" }
   ),
-
-     -- Show/Hide Wibox
-     awful.key({ modkey }, "b", function ()
-             for s in screen do
-                 s.mywibox.visible = not s.mywibox.visible
-                 if s.mybottomwibox then
-                     s.mybottomwibox.visible = not s.mybottomwibox.visible
-                 end
-            end
-         end,
-         {description = "toggle wibox", group = "awesome"}),
-
-
   awful.key(
     { modkey, "Control" },
     "r",
@@ -282,7 +275,7 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
       awful.spawn.easy_async_with_shell(
         "pkexec xfpm-power-backlight-helper --get-brightness",
         function(stdout)
-          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) + 5 * BACKLIGHT_SEPS), function(stdou2)
+          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) + BACKLIGHT_SEPS), function(stdou2)
 
           end)
           awesome.emit_signal("module::brightness_osd:show", true)
@@ -300,7 +293,7 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
       awful.spawn.easy_async_with_shell(
         "pkexec xfpm-power-backlight-helper --get-brightness",
         function(stdout)
-          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) - 5 * BACKLIGHT_SEPS), function(stdout2)
+          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) - BACKLIGHT_SEPS), function(stdout2)
 
           end)
           awesome.emit_signal("module::brightness_osd:show", true)
@@ -343,80 +336,16 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
     end,
     { description = "Toggle keyboard layout", group = "System" }
   ),
-  awful.key({ modkey, "Control" }, "i",  awful.client.floating.toggle                     ,
-  {description = "toggle floating", group = "client"}),
-
-
-
   awful.key(
     { modkey },
-    "",
+    "i",
     function()
-      awful.spawn.easy_async_with_shell(
-        [[xprop | grep WM_CLASS | awk '{gsub(/"/, "", $4); print $4}']],
-        function(stdout)
-          if stdout then
-            ruled.client.append_rule {
-              rule = { class = stdout:gsub("\n", "") },
-              properties = {
-                floating = true
-              },
-            }
-            awful.spawn.easy_async_with_shell(
-              "cat ~/.config/awesome/src/assets/rules.txt",
-              function(stdout2)
-                for class in stdout2:gmatch("%a+") do
-                  if class:match(stdout:gsub("\n", "")) then
-                    return
-                  end
-                end
-                awful.spawn.with_shell("echo -n '" .. stdout:gsub("\n", "") .. ";' >> ~/.config/awesome/src/assets/rules.txt")
-                local c = mouse.screen.selected_tag:clients()
-                for j, client in ipairs(c) do
-                  if client.class:match(stdout:gsub("\n", "")) then
-                    client.floating = true
-                  end
-                end
-              end
-            )
-          end
-        end
-      )
+
     end
   ),
   awful.key(
     { modkey, "Shift" },
-    "",
-    function()
-      awful.spawn.easy_async_with_shell(
-        [[xprop | grep WM_CLASS | awk '{gsub(/"/, "", $4); print $4}']],
-        function(stdout)
-          if stdout then
-            ruled.client.append_rule {
-              rule = { class = stdout:gsub("\n", "") },
-              properties = {
-                floating = false
-              },
-            }
-            awful.spawn.easy_async_with_shell(
-              [[
-                                REMOVE="]] .. stdout:gsub("\n", "") .. [[;"
-                                STR=$(cat ~/.config/awesome/src/assets/rules.txt)
-                                echo -n ${STR//$REMOVE/} > ~/.config/awesome/src/assets/rules.txt
-                            ]],
-              function(stdout2)
-                local c = mouse.screen.selected_tag:clients()
-                for j, client in ipairs(c) do
-                  if client.class:match(stdout:gsub("\n", "")) then
-                    client.floating = false
-                  end
-                end
-              end
-            )
-          end
-        end
-      )
-    end
+    "i",
+    awful.client.floating.toggle
   )
-
 )

@@ -5,7 +5,7 @@
 #wal -i ~/Pictures/astronaut.jpg &&
 
 # Start picom
-# disabled because it interferes with awesome notifications dunst &
+#dunst &
 picom --config ~/.config/picom/picom.conf &
 xinput set-prop ELAN0521:01\ 04F3:31B1\ Touchpad  358 1 & # set click with tap on touchpad
 xinput set-prop ELAN0521:01\ 04F3:31B1\ Touchpad  340 0.4 & # set sensivility
