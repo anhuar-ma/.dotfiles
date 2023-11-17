@@ -20,22 +20,6 @@ return function()
     {
       {
         {
-          {
-            {
-              id = "icon",
-              image = gears.color.recolor_image(icondir .. "battery-unknown.svg", "#212121"),
-              widget = wibox.widget.imagebox,
-              resize = false
-            },
-            id = "icon_layout",
-            widget = wibox.container.place
-          },
-          id = "icon_margin",
-          top = dpi(2),
-          widget = wibox.container.margin
-        },
-        spacing = dpi(10),
-        {
           visible = false,
           align = 'center',
           valign = 'center',
@@ -53,7 +37,7 @@ return function()
     bg = color["Purple200"],
     fg = color["Grey900"],
     shape = function(cr, width, height)
-      gears.shape.rounded_rect(cr, width, height, 5)
+      gears.shape.rounded_rect(cr, width, height, 7)
     end,
     widget = wibox.container.background
   }
@@ -116,7 +100,7 @@ return function()
 
         battery_widget.container.battery_layout.spacing = dpi(5)
         battery_widget.container.battery_layout.label.visible = true
-        battery_widget.container.battery_layout.label:set_text(battery_percentage .. '%')
+        battery_widget.container.battery_layout.label:set_text("🗲 ".. battery_percentage .. '%')
 
         local icon = 'battery'
 

@@ -275,7 +275,7 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
       awful.spawn.easy_async_with_shell(
         "pkexec xfpm-power-backlight-helper --get-brightness",
         function(stdout)
-          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) + BACKLIGHT_SEPS), function(stdou2)
+          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) +  2 * BACKLIGHT_SEPS), function(stdou2)
 
           end)
           awesome.emit_signal("module::brightness_osd:show", true)
@@ -293,7 +293,7 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
       awful.spawn.easy_async_with_shell(
         "pkexec xfpm-power-backlight-helper --get-brightness",
         function(stdout)
-          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) - BACKLIGHT_SEPS), function(stdout2)
+          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) - 2 * BACKLIGHT_SEPS), function(stdout2)
 
           end)
           awesome.emit_signal("module::brightness_osd:show", true)

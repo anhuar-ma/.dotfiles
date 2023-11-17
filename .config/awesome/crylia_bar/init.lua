@@ -7,7 +7,6 @@ local wibox = require("wibox")
 
 
 
-mytextclock = wibox.widget.textclock()
 
 awful.screen.connect_for_each_screen(
 -- For each screen this function is called once
@@ -28,7 +27,7 @@ awful.screen.connect_for_each_screen(
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox {
         screen  = s,
-                fg = "#FFFFFF",
+                fg = "#ff59af",
         buttons = {
             awful.button({ }, 1, function () awful.layout.inc( 1) end),
             awful.button({ }, 3, function () awful.layout.inc(-1) end),
@@ -42,7 +41,7 @@ awful.screen.connect_for_each_screen(
 s.mytaglist = awful.widget.taglist {
     screen  = s,
     filter  = function(t, args)
-        return #t:clients() > 0
+        return #t:clients() > 0 or t.selected
     end,
     buttons = {
         awful.button({ }, 1, function(t) t:view_only() end),
@@ -77,31 +76,54 @@ s.mytaglist = awful.widget.taglist {
         }
     }
 
-  s.battery = require("src.widgets.battery")()
-    -- @DOC_WIBAR@
+  require("src.modules.powermenu")(s)
+  -- TODO: rewrite calendar osd, maybe write an own inplementation
+  -- require("src.modules.calendar_osd")(s)
+  require("src.modules.volume_osd")(s)
+  require("src.modules.brightness_osd")(s)
+  require("src.modules.titlebar")
+  require("src.modules.volume_controller")(s)
+
+
+  s.taglist = require("src.widgets.mytaglist")(s)
+  s.ram_info = require("src.widgets.myram_info")()
+  s.audio = require("src.widgets.myaudio")(s)
+  s.battery = require("src.widgets.mybattery")()
+   s.date = require("src.widgets.mydate")()
+  s.clock = require("src.widgets.myclock")()  
+  -- @DOC_WIBAR@
     -- Create the wibox
     s.mywibox = awful.wibar {
         position = "top",
         screen   = s,
-        bg = "#11112D", -- Set the background color to red
+        bg = "#00",
+        border_width = 0,
+        type = "dock",
+        input_passthrough = true, 
         -- @DOC_SETUP_WIDGETS@
         widget   = {
             layout = wibox.layout.align.horizontal,
             { -- Left widgets
                 layout = wibox.layout.fixed.horizontal,
                -- s.mylayoutbox,
-                s.mytaglist,
+                --s.mytaglist,
+                s.taglist,
             },
             { -- Middle widget (empty space)
             layout  = wibox.layout.fixed.horizontal,
-            spacing = 1,  -- Adjust the spacing as needed
-            wibox.widget.textbox(' '), -- This is an empty space
         },
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
                 wibox.widget.systray(),
+                s.audio,
+                wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
+                s.ram_info,
+                wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
                 s.battery,
-                mytextclock,
+                wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
+                s.date,
+                wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
+                s.clock
             },
         }
     }

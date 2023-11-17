@@ -43,8 +43,8 @@ Theme.menu_shape = function(cr, width, heigth)
   gears.shape.rounded_rect(cr, width, heigth, 5)
 end
 
-Theme.taglist_fg_focus = color["Grey900"]
-Theme.taglist_bg_focus = color["White"]
+Theme.taglist_fg_focus = color["White"]
+Theme.taglist_bg_focus = '#8a25f7'
 
 Theme.tooltip_border_color = color["Grey800"]
 Theme.tooltip_bg = color["Grey900"]
