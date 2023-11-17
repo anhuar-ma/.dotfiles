@@ -107,6 +107,7 @@ s.mytaglist = awful.widget.taglist {
                 layout = wibox.layout.fixed.horizontal,
                -- s.mylayoutbox,
                 --s.mytaglist,
+                wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
                 s.taglist,
             },
             { -- Middle widget (empty space)
@@ -123,7 +124,8 @@ s.mytaglist = awful.widget.taglist {
                 wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
                 s.date,
                 wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
-                s.clock
+                s.clock,
+                wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
             },
         }
     }
