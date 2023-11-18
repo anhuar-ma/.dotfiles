@@ -4,6 +4,7 @@
 -- Awesome Libs
 local awful = require("awful")
 local wibox = require("wibox")
+local dpi = require("beautiful").xresources.apply_dpi
 
 
 
@@ -86,6 +87,7 @@ s.mytaglist = awful.widget.taglist {
 
 
   s.taglist = require("src.widgets.mytaglist")(s)
+  s.tasklist = require("src.widgets.mytasklist")(s)
   s.ram_info = require("src.widgets.myram_info")()
   s.audio = require("src.widgets.myaudio")(s)
   s.battery = require("src.widgets.mybattery")()
@@ -99,21 +101,27 @@ s.mytaglist = awful.widget.taglist {
         bg = "#00",
         border_width = 0,
         type = "dock",
-        input_passthrough = true, 
         -- @DOC_SETUP_WIDGETS@
-        widget   = {
-            layout = wibox.layout.align.horizontal,
-            { -- Left widgets
-                layout = wibox.layout.fixed.horizontal,
-               -- s.mylayoutbox,
-                --s.mytaglist,
-                wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
-                s.taglist,
-            },
-            { -- Middle widget (empty space)
-            layout  = wibox.layout.fixed.horizontal,
+        --
+        --
+        --
+
+
+widget = {
+        layout = wibox.layout.align.horizontal,
+        { -- Left widgets
+            layout = wibox.layout.align.horizontal, -- Center horizontally
+            wibox.widget.textbox(' ', dpi(5)),
+            s.taglist,
         },
-            { -- Right widgets
+        { -- Center widget (tasklist)
+            layout = wibox.layout.align.horizontal, -- Center horizontally
+            expand = "none", -- Do not expand the center widget
+            nil, -- Left flexible space
+            s.tasklist,
+            nil, -- More right flexible space
+        },
+            {
                 layout = wibox.layout.fixed.horizontal,
                 wibox.widget.systray(),
                 s.audio,
@@ -125,10 +133,12 @@ s.mytaglist = awful.widget.taglist {
                 s.date,
                 wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
                 s.clock,
-                wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
+                wibox.widget.textbox(' ', dpi(5)),
             },
-        }
     }
+}
+
+    
 end)
 
 

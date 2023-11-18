@@ -208,9 +208,18 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
     end,
     { descripton = "Client switcher (alt+tab)", group = "Application" }
   ),
-  awful.key(
+awful.key(
     { modkey },
     "e",
+    function()
+      awful.spawn("emacs")
+    end,
+    { descripton = "Open file manager", group = "System" }
+  ),
+
+ awful.key(
+    { modkey },
+    "t",
     function()
       awful.spawn(user_vars.file_manager)
     end,

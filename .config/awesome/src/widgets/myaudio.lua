@@ -49,7 +49,15 @@ return function(s)
         local volume = tonumber(stdout) or 0
         audio_widget.container.audio_layout.spacing = dpi(5)
         audio_widget.container.audio_layout.label.visible = true
-      audio_widget.container.audio_layout.label:set_text("ılı ".. volume .. "%")
+
+        if volume >= 0 and volume < 34 then
+          icon = icon .. "-low"
+        elseif volume >= 34 and volume < 67 then
+          icon = icon .. "-medium"
+        elseif volume >= 67 then
+          icon = icon .. "-high"
+        end
+        audio_widget.container.audio_layout.label:set_text("ılı " .. volume .. "%")
         awesome.emit_signal("get::volume", volume)
       end
     )
@@ -95,3 +103,4 @@ return function(s)
   check_muted()
   return audio_widget
 end
+
