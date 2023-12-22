@@ -184,13 +184,22 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
     { descripton = "Application launcher", group = "Application" }
   ),
 
-  awful.key(
+   awful.key(
     { modkey },
     "r",
     function()
       awful.spawn("rofi -show drun")
     end,
     { descripton = "Application launcher", group = "Application" }
+  ),
+
+   awful.key(
+    { modkey, "Shift"},
+    "r",
+    function()
+      awful.spawn("rofi -show run")
+    end,
+    { descripton = "run a command on rofi", group = "Application" }
   ),
   awful.key(
     { "Mod1" },
@@ -200,6 +209,16 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
     end,
     { descripton = "Client switcher (alt+tab)", group = "Application" }
   ),
+
+  awful.key(
+    { "Mod1","Shift" },
+    "Tab",
+    function()
+      awful.spawn("rofi -show window")
+    end,
+    { descripton = "Client switcher (alt+tab)", group = "Application" }
+  ),
+
   awful.key(
     { "Mod1" },
     "",

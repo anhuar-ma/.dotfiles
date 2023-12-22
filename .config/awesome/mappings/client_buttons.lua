@@ -5,15 +5,15 @@ local gears = require("gears")
 local modkey = user_vars.modkey
 
 
--- Function to focus the client under the mouse cursor
+--Function to focus the client under the mouse cursor
 local function focus_client_under_mouse()
     -- Get the mouse coordinates
     local x, y = mouse.coords()
-    
+
     -- Find the client (window) under the mouse cursor
     local c = awful.mouse.client_under_pointer()
-    
-    -- Check if a client was found
+
+  -- Check if a client was found
     if c then
         -- Focus the client
         client.focus = c

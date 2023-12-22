@@ -23,5 +23,9 @@ echo -n (set_color ffb600)(prompt_pwd --full-length-dirs=3 --dir-length=3)" "(se
     alias la="exa --icons --colour=always -la"
     alias vi="nvim"
     alias pacman="sudo pacman"
+    alias upgrade-system="sudo pacman -Syu --needed"
+    alias copilot="gh copilo"
+    alias gcs="gh copilot suggest"
+    alias gce="gh copilot explain"
 end
 
