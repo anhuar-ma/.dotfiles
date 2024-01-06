@@ -32,7 +32,7 @@ user_vars = {
 
   -- Write the terminal command to start anything here
   autostart = {
-    "~/.config/qtile/autostart_once.sh"
+    --"~/.config/qtile/autostart_once.sh"
   },
 
   -- Type 'ip a' and check your wlan and ethernet name
@@ -56,7 +56,7 @@ user_vars = {
   modkey = "Mod4",
 
   -- place your wallpaper at this path with this name, you could also try to change the path
-  wallpaper = home .. "/.config/awesome/src/assets/blackwall.jpg",
+  wallpaper = home .. "/.config/awesome/src/assets/solo.jpg",
 
   -- Naming scheme for the powermenu, userhost = "user@hostname", fullname = "Firstname Surname", something else ...
   namestyle = "userhost",

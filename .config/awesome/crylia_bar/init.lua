@@ -91,10 +91,14 @@ s.mytaglist = awful.widget.taglist {
   s.ram_info = require("src.widgets.myram_info")()
   s.audio = require("src.widgets.myaudio")(s)
   s.battery = require("src.widgets.mybattery")()
-   s.date = require("src.widgets.mydate")()
+  s.date = require("src.widgets.mydate")()
   s.clock = require("src.widgets.myclock")()  
+  s.systray = require("src.widgets.mysystray")()  
   -- @DOC_WIBAR@
     -- Create the wibox
+    --
+    --
+    if s.index == 1 then
     s.mywibox = awful.wibar {
         position = "top",
         screen   = s,
@@ -102,10 +106,6 @@ s.mytaglist = awful.widget.taglist {
         border_width = 0,
         type = "dock",
         -- @DOC_SETUP_WIDGETS@
-        --
-        --
-        --
-
 
 widget = {
         layout = wibox.layout.align.horizontal,
@@ -123,12 +123,14 @@ widget = {
         },
             {
                 layout = wibox.layout.fixed.horizontal,
-                wibox.widget.systray(),
+                --wibox.widget.systray(),
+                s.systray,
+                wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
                 s.audio,
                 wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
                 s.ram_info,
-                wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
-                s.battery,
+                --wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
+                --s.battery,
                 wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
                 s.date,
                 wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
@@ -137,6 +139,49 @@ widget = {
             },
     }
 }
+
+else
+ s.mywibox = awful.wibar {
+        position = "top",
+        screen   = s,
+        bg = "#00",
+        border_width = 0,
+        type = "dock",
+        -- @DOC_SETUP_WIDGETS@
+
+widget = {
+        layout = wibox.layout.align.horizontal,
+        { -- Left widgets
+            layout = wibox.layout.align.horizontal, -- Center horizontally
+            wibox.widget.textbox(' ', dpi(5)),
+            s.taglist,
+        },
+        { -- Center widget (tasklist)
+            layout = wibox.layout.align.horizontal, -- Center horizontally
+            expand = "none", -- Do not expand the center widget
+            nil, -- Left flexible space
+            s.tasklist,
+            nil, -- More right flexible space
+        },
+            {
+                layout = wibox.layout.fixed.horizontal,
+                --wibox.widget.systray(),
+                --s.systray,
+                --wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
+                --s.audio,
+                --wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
+                s.ram_info,
+                wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
+                --s.battery,
+                --wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
+                s.date,
+                wibox.container.margin(nil, 5, 0, 0, 0), -- Spacer with 5px on left and right
+                s.clock,
+                wibox.widget.textbox(' ', dpi(5)),
+            },
+    }
+}
+end
 
     
 end)

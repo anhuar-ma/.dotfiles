@@ -40,10 +40,12 @@ for i = 1, 9 do
       "#" .. i + 9,
       function()
         local screen = awful.screen.focused()
+        local tag = screen.tags[i]
         if client.focus then
           local tag = screen.tags[i]
           if tag then
             client.focus:move_to_tag(tag)
+            tag:view_only()
           end
         end
       end,

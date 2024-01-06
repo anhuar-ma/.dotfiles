@@ -48,8 +48,8 @@ local list_update = function(widget, buttons, label, data, objects)
 				widget = wibox.container.margin,
 				id = "container"
 			},
-			bg = color["White"],
-			fg = color["Grey900"],
+			--bg = color["White"],
+			fg = color["White"],
 			shape = function(cr, width, height)
 				gears.shape.rounded_rect(cr, width, height, 7)
 			end,
@@ -106,11 +106,11 @@ local list_update = function(widget, buttons, label, data, objects)
 					task_tool_tip:remove_from_object(task_widget)
 				end
 			end
-			task_widget:set_bg(color["White"])
-			task_widget:set_fg(color["Grey900"])
+			--task_widget:set_bg(color["White"])
+			task_widget:set_fg(color["White"])
 			task_widget.container.layout_it.title:set_text(text)
 		else
-			task_widget:set_bg("#3A475C")
+		--	task_widget:set_bg("#3A475C")
 			task_widget.container.layout_it.title:set_text('')
 		end
 		task_widget.container.layout_it.margin.layout_icon.icon:set_image(Get_icon(user_vars.icon_theme, object))
@@ -140,7 +140,8 @@ local list_update = function(widget, buttons, label, data, objects)
 			"button::press",
 			function()
 				if object == client.focus then
-					task_widget.bg = "#ffffffaa"
+					--task_widget.bg = "#ffffffaa"
+					task_widget.bg = '#dddddddd'
 				else
 					task_widget.bg = '#3A475Caa'
 				end
@@ -151,7 +152,7 @@ local list_update = function(widget, buttons, label, data, objects)
 			"button::release",
 			function()
 				if object == client.focus then
-					task_widget.bg = "#ffffffdd"
+					--task_widget.bg = "#ffffffdd"
 				else
 					task_widget.bg = '#3A475Cdd'
 				end
@@ -208,4 +209,3 @@ return function(s)
 		wibox.layout.fixed.horizontal()
 	)
 end
-

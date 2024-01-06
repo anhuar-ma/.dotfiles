@@ -43,8 +43,8 @@ Theme.menu_shape = function(cr, width, heigth)
   gears.shape.rounded_rect(cr, width, heigth, 5)
 end
 
-Theme.taglist_fg_focus = color["Grey900"]
-Theme.taglist_bg_focus = color["White"]
+Theme.taglist_fg_focus = color["White"]
+Theme.taglist_bg_focus = '#8a25f7'
 
 Theme.tooltip_border_color = color["Grey800"]
 Theme.tooltip_bg = color["Grey900"]
@@ -77,6 +77,9 @@ Theme.hotkeys_description_font = user_vars.font.bold
 -- Icon directory path
 local layout_path = Theme_path .. "../assets/layout/"
 
+
+
+Theme.layout_fairv = color["White"]
 -- Here are the icons for the layouts defined, if you want to add more layouts go to main/layouts.lua
 Theme.layout_floating = layout_path .. "floating.svg"
 Theme.layout_tile = layout_path .. "tile.svg"

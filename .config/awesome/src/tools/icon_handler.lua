@@ -26,7 +26,7 @@ function Get_icon(theme, client, program_string, class_string, is_steam)
         if client.icon then
           return client.icon
         else
-          return "/usr/share/icons/Papirus-Dark/128x128/apps/application-default-icon.svg"
+          return "/usr/share/icons/apps/scalable/application-default-icon.svg"
         end
       end
     else
@@ -58,7 +58,8 @@ function Get_icon(theme, client, program_string, class_string, is_steam)
           icon_cache[#icon_cache + 1] = iconDir .. clientName
           return iconDir .. clientName
         elseif not class_string then
-          return "/usr/share/icons/Papirus-Dark/128x128/apps/application-default-icon.svg"
+          --return "/usr/share/icons/Papirus-Dark/128x128/apps/application-default-icon.svg"
+          return "/usr/share/icons/apps/scalable/application-default-icon.svg"
         else
           clientName = class_string .. ".svg"
           iconDir = "/usr/share/icons/" .. theme .. "/" .. res .. "/apps/"
@@ -67,13 +68,15 @@ function Get_icon(theme, client, program_string, class_string, is_steam)
             icon_cache[#icon_cache + 1] = iconDir .. clientName
             return iconDir .. clientName
           else
-            return "/usr/share/icons/Papirus-Dark/128x128/apps/application-default-icon.svg"
+            --return "/usr/share/icons/Papirus-Dark/128x128/apps/application-default-icon.svg"
+             return "/usr/share/icons/apps/scalable/application-default-icon.svg"
           end
         end
       end
     end
     if client then
-      return "/usr/share/icons/Papirus-Dark/128x128/apps/application-default-icon.svg"
+      --return "/usr/share/icons/Papirus-Dark/128x128/apps/application-default-icon.svg"
+      return "/usr/share/icons/apps/scalable/application-default-icon.svg"
     end
   end
 end

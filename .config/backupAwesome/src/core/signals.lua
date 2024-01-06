@@ -2,6 +2,7 @@
 -- Awesome Libs
 local awful = require("awful")
 local beautiful = require("beautiful")
+local dpi = require("beautiful").xresources.apply_dpi
 local gears = require("gears")
 local wibox = require("wibox")
 
@@ -78,6 +79,30 @@ client.connect_signal(
     )
   end
 )
+
+client.connect_signal("property::maximized", function(c)
+    if c.maximized then
+        -- Adjust these values to control the size of the gap
+        local gap_size = dpi(10)
+        local screen_geometry = c.screen.workarea
+
+        -- Calculate new dimensions and position
+        local new_width = screen_geometry.width - (2 * gap_size)
+        local new_height = screen_geometry.height - (2 * gap_size)
+        local new_x = screen_geometry.x + gap_size
+        local new_y = screen_geometry.y + gap_size
+
+        -- Apply the new dimensions and position
+        c:geometry({ x = new_x, y = new_y, width = new_width, height = new_height })
+    else
+        -- Reset the geometry if the client is no longer maximized
+        c.maximized_horizontal = false
+        c.maximized_vertical = false
+        c.maximized = false
+    end
+end)
+
+
 
 -- Workaround for focused border color, why in the love of god doesnt it work with
 -- beautiful.border_focus

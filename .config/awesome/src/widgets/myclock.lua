@@ -35,8 +35,8 @@ return function()
       right = dpi(8),
       widget = wibox.container.margin
     },
-    bg = color["Orange200"],
-    fg = color["Grey900"],
+   -- bg = color["Orange200"],
+    fg = color["White"],
     shape = function(cr, width, height)
       gears.shape.rounded_rect(cr, width, height, 7)
     end,

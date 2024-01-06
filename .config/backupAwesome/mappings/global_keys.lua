@@ -184,13 +184,22 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
     { descripton = "Application launcher", group = "Application" }
   ),
 
-  awful.key(
+   awful.key(
     { modkey },
     "r",
     function()
       awful.spawn("rofi -show drun")
     end,
     { descripton = "Application launcher", group = "Application" }
+  ),
+
+   awful.key(
+    { modkey, "Shift"},
+    "r",
+    function()
+      awful.spawn("rofi -show run")
+    end,
+    { descripton = "run a command on rofi", group = "Application" }
   ),
   awful.key(
     { "Mod1" },
@@ -200,6 +209,16 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
     end,
     { descripton = "Client switcher (alt+tab)", group = "Application" }
   ),
+
+  awful.key(
+    { "Mod1","Shift" },
+    "Tab",
+    function()
+      awful.spawn("rofi -show window")
+    end,
+    { descripton = "Client switcher (alt+tab)", group = "Application" }
+  ),
+
   awful.key(
     { "Mod1" },
     "",
@@ -208,9 +227,18 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
     end,
     { descripton = "Client switcher (alt+tab)", group = "Application" }
   ),
-  awful.key(
+awful.key(
     { modkey },
     "e",
+    function()
+      awful.spawn("emacs")
+    end,
+    { descripton = "Open file manager", group = "System" }
+  ),
+
+ awful.key(
+    { modkey },
+    "t",
     function()
       awful.spawn(user_vars.file_manager)
     end,
@@ -275,7 +303,7 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
       awful.spawn.easy_async_with_shell(
         "pkexec xfpm-power-backlight-helper --get-brightness",
         function(stdout)
-          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) + BACKLIGHT_SEPS), function(stdou2)
+          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) +  2 * BACKLIGHT_SEPS), function(stdou2)
 
           end)
           awesome.emit_signal("module::brightness_osd:show", true)
@@ -293,7 +321,7 @@ awful.key({ modkey }, "", toggle_layout, {description = "Toggle layout", group =
       awful.spawn.easy_async_with_shell(
         "pkexec xfpm-power-backlight-helper --get-brightness",
         function(stdout)
-          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) - BACKLIGHT_SEPS), function(stdout2)
+          awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --set-brightness " .. tostring(tonumber(stdout) - 2 * BACKLIGHT_SEPS), function(stdout2)
 
           end)
           awesome.emit_signal("module::brightness_osd:show", true)

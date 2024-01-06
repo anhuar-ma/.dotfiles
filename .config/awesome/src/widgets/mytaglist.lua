@@ -74,7 +74,7 @@ local list_update = function(widget, buttons, label, data, objects)
       tag_widget:set_bg(color["White"])
       tag_widget:set_fg(color["Grey900"])
     else
-      tag_widget:set_bg("#3A475C")
+      --tag_widget:set_bg("#3A475C")
     end
 
     -- Set the icon for each client
