@@ -37,7 +37,10 @@
 (setq doom-theme 'My-shades-of-purple)
 ;;(load-theme 'My-shades-of-purple-theme)
 ;;opacacity
-(doom/set-frame-opacity 75)
+;; (set-frame-parameter nil 'alpha-background)
+;; (add-to-list 'default-frame-alist '(alpha-background . 60))
+
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
@@ -86,15 +89,15 @@
 ;;(add-to-list 'auto-mode-alist '("\\.html?\\'" . html-mode)))
 
 ;; accept completion from copilot and fallback to company
-;; (use-package! copilot
-;;   :hook (prog-mode . copilot-mode)
-;;   :bind (:map copilot-completion-map
-;;               ;;("<left>" . 'copilot-accept-completion)
-;;               ;; ("TAB" . 'copilot-accept-completion)
-;;               ;;("C-TAB" . 'copilot-accept-completion)
-;;               ;;("C-TAB" . 'copilot-accept-completion-by-word)
-;;               ;; ("C-<tab>" . 'copilot-accept-completion)
-;;               ("<backtab>" . 'copilot-accept-completion)))
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ;;("<left>" . 'copilot-accept-completion)
+              ;; ("TAB" . 'copilot-accept-completion)
+              ;;("C-TAB" . 'copilot-accept-completion)
+              ;;("C-TAB" . 'copilot-accept-completion-by-word)
+              ;; ("C-<tab>" . 'copilot-accept-completion)
+              ("<backtab>" . 'copilot-accept-completion)))
 ;; (add-to-list 'auto-mode-alist '("\\.html$" . mhtml-mode))
 ;; Enable LSP for programming modes
 (with-eval-after-load 'flycheck
@@ -137,15 +140,24 @@
 (setq company-idle-delay 0.2) ; Set the delay to 0.2 seconds or any value you prefer
 (setq company-minimum-prefix-length 1) ; Show completions after typing 1 character
 (setq whitespace-style '(face tabs spaces trailing lines space-before-tab indentation empty space-after-tab space-mark tab-mark))
-;; Assuming DAP mode is already configured
-;; Customize the collapsing behavior of the locals tab
-;; Ensure locals tab is always visible
 
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp projectile hydra flycheck company avy which-key helm-xref dap-mode))
+(setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
+    projectile hydra flycheck company avy which-key helm-xref dap-mode))
+
+(when (cl-find-if-not #'package-installed-p package-selected-packages)
+  (package-refresh-contents)
+  (mapc #'package-install package-selected-packages))
+
+;; sample `helm' configuration use https://github.com/emacs-helm/helm/ for details
+(helm-mode)
+(require 'helm-xref)
+(define-key global-map [remap find-file] #'helm-find-files)
+(define-key global-map [remap execute-extended-command] #'helm-M-x)
+(define-key global-map [remap switch-to-buffer] #'helm-mini)
 
 (which-key-mode)
 (add-hook 'c-mode-hook 'lsp)
@@ -163,7 +175,31 @@
   (require 'dap-cpptools)
   (yas-global-mode))
 
-;; Treemacs
-(require 'project)
-(setq display-current-project-exclusively t)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

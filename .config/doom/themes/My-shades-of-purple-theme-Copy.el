@@ -53,7 +53,7 @@ Can be an integer to determine the exact padding."
                 "A dark theme inspired by VS code's shades-of-purple"
 
                 ;; name        default   256       16
-                ((bg         '("#11112d" "#11112d" "black"))
+                ((bg         '("#2d2b55" "#2d2b55"  "black"))
                  (bg-alt     '("#1e1e3f" "#1e1e3f" "black"))
                  (base0      '("#161a2a" "#161a2a" "black"))
                  (base1      '("#191a2a" "#191a2a" "brightblack"))
