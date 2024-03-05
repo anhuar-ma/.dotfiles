@@ -1,10 +1,10 @@
 import = ["/home/anhuar/.config/alacritty/rice-colors.toml", "/home/anhuar/.config/alacritty/fonts.toml"]
 live_config_reload = true
 
- [shell]
- program = "/usr/bin/tmux"
- args = ["new-session"]
-
+ # [shell]
+ # program = "/usr/bin/tmux"
+ # args = ["new-session"]
+ #
 [cursor]
 blink_interval = 550
 unfocused_hollow = false
