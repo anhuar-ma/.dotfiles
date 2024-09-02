@@ -26,10 +26,8 @@ xfce4-screensaver &
 #xfce4-power-manager &
 #xfce4-power-manager --quit &
 xfce4-power-manager &
-#qbittorrent &
 #imwheel --kill && imwheel &
 #xmodmap -e "keycode 135 = ISO_Level3_Shift" &
 otd-daemon &
-qbittorrent &
 #xrandr --output HDMI-1-0 --off && xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x360 --rotate normal --output DP-1 --off --output DP-2 --off --output HDMI-1-0 --mode 2560x1440 --pos 1920x0 --rotate normal &
 #sudo rmmod r816 && sudo modprobe r8169 &
