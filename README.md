@@ -13,10 +13,10 @@ Icons: Candy Icons for a visually appealing and cohesive desktop experience
 To use these dotfiles, you can clone the repository, execute package.sh and symlink the configuration files to their appropriate locations with stow.
 ```bash
 git clone https://github.com/your-username/dotfiles.git
-chmod +x .dotfiles/packages.sh
-.dotfiles/packages.sh
 cd .dotfiles
-stow.
+stow .
+chmod +x ./packages.sh
+./packages.sh
 ```
 ## Customization
 Feel free to explore the files and tweak the settings as needed :).
