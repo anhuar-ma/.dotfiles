@@ -1,0 +1,49 @@
+# -*- mode: snippet -*-
+# key: __jd22
+# name: Daily Journal Template
+# --
+* Daily Journal
+
+** Todays Preparation
+- Top 3 priorities:
+  1. $1
+  2. $20
+  3. $21
+
+** Morning Intention
+- *Today I intend to*: $2
+
+** Energy & Mood
+- *Energy Level*: $3
+- *Mood*: $4
+- *Main Factor*: $5
+
+** Accomplishments
+- $9
+
+** Learning & Growth
+- *What I learned today?*
+  -$10
+- *Challenges faced:*
+  -$11
+- *How I overcame them?*
+  -$12
+
+** Gratitude Corner
+- *I'm grateful for:*
+  -$13
+- *Someone who helped me today:*
+  -$14
+- *A small win worth celebrating:*
+  -$15
+
+** Self-Reflection
+- *What went well:*
+ -$16
+- *What could be better:*
+  -$17
+- *One thing to improve tomorrow:
+  -$18
+
+** Personal Notes
+  -

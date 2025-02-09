@@ -1,0 +1,16 @@
+#+TITLE: Do List {{date}}
+
+* TODO Daily Tasks {{date}} [0%]
+SCHEDULED: <{{date}}>
+
+- [ ] Web Devlopment (1 video)
+- [ ] Study TOEFL
+- [ ] LEETCODE (1 problem)
+- [ ] Competitive Programing
+- [ ] Khan academy Math
+- [ ] Machine learning
+- [ ] QWERTY
+- [ ] Prepare Agenda
+
+* Other Tasks [0%]
+- [ ]

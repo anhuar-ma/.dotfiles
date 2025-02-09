@@ -17,6 +17,18 @@ local function toggle_layout()
 		current_layout = awful.layout.suit.tile
 	end
 end
+--Toggle layouts
+local current_layout = "qwerty"
+local function toggle_layout()
+   if current_layout == "qwerty" then
+       awful.spawn("setxkbmap us -variant colemak_dh")
+       current_layout = "colemak-dh"
+   else
+       awful.spawn("setxkbmap us")
+       current_layout = "qwerty"
+   end
+end
+
 return gears.table.join(
 
 	awful.key({ modkey }, "b", function()
@@ -63,7 +75,7 @@ return gears.table.join(
 	end, { description = "Decrease client width", group = "Layout" }),
 
 	awful.key({ modkey }, "s", function()
-		awful.spawn("brave")
+		awful.spawn("firefox")
 	end, { descripton = "Application launcher", group = "Application" }),
 
 	awful.key({ modkey }, "r", function()
@@ -91,7 +103,7 @@ return gears.table.join(
 	end, { descripton = "Open file manager", group = "System" }),
 
 	awful.key({ modkey }, "t", function()
-		awful.spawn(user_vars.file_manager)
+		awful.spawn("thunar")
 	end, { descripton = "Open file manager", group = "System" }),
 
 	awful.key({ modkey, "Shift" }, "f", function()
@@ -125,33 +137,41 @@ return gears.table.join(
 		awesome.emit_signal("widget::volume_osd:rerun")
 	end, { description = "Mute volume", group = "System" }),
 
-	awful.key({}, "XF86MonBrightnessUp", function(c)
-		--awful.spawn("xbacklight -time 100 -inc 10%+")
-		awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --get-brightness", function(stdout)
-			awful.spawn.easy_async_with_shell(
-				"pkexec xfpm-power-backlight-helper --set-brightness "
-					.. tostring(tonumber(stdout) + 2 * BACKLIGHT_SEPS),
-				function(stdou2) end
-			)
-			awesome.emit_signal("module::brightness_osd:show", true)
-			awesome.emit_signal("module::brightness_slider:update")
-			awesome.emit_signal("widget::brightness_osd:rerun")
-		end)
-	end, { description = "Raise backlight brightness", group = "System" }),
 
-	awful.key({}, "XF86MonBrightnessDown", function(c)
-		awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --get-brightness", function(stdout)
-			awful.spawn.easy_async_with_shell(
-				"pkexec xfpm-power-backlight-helper --set-brightness "
-					.. tostring(tonumber(stdout) - 2 * BACKLIGHT_SEPS),
-				function(stdout2) end
-			)
-			awesome.emit_signal("module::brightness_osd:show", true)
-			awesome.emit_signal("module::brightness_slider:update")
-			awesome.emit_signal("widget::brightness_osd:rerun")
-		end)
-	end, { description = "Lower backlight brightness", group = "System" }),
 
+awful.key({ modkey, "Shift" }, "space", function()
+    toggle_layout()
+end, { description = "Toggle keyboard layout", group = "System" }),
+
+
+
+	--
+	-- awful.key({}, "XF86MonBrightnessUp", function(c)
+	-- 	--awful.spawn("xbacklight -time 100 -inc 10%+")
+	-- 	awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --get-brightness", function(stdout)
+	-- 		awful.spawn.easy_async_with_shell(
+	-- 			"pkexec xfpm-power-backlight-helper --set-brightness "
+	-- 				.. tostring(tonumber(stdout) + 2 * BACKLIGHT_SEPS),
+	-- 			function(stdou2) end
+	-- 		)
+	-- 		awesome.emit_signal("module::brightness_osd:show", true)
+	-- 		awesome.emit_signal("module::brightness_slider:update")
+	-- 		awesome.emit_signal("widget::brightness_osd:rerun")
+	-- 	end)
+	-- end, { description = "Raise backlight brightness", group = "System" }),
+	--
+	-- awful.key({}, "XF86MonBrightnessDown", function(c)
+	-- 	awful.spawn.easy_async_with_shell("pkexec xfpm-power-backlight-helper --get-brightness", function(stdout)
+	-- 		awful.spawn.easy_async_with_shell(
+	-- 			"pkexec xfpm-power-backlight-helper --set-brightness "
+	-- 				.. tostring(tonumber(stdout) - 2 * BACKLIGHT_SEPS),
+	-- 			function(stdout2) end
+	-- 		)
+	-- 		awesome.emit_signal("module::brightness_osd:show", true)
+	-- 		awesome.emit_signal("module::brightness_slider:update")
+	-- 		awesome.emit_signal("widget::brightness_osd:rerun")
+	-- 	end)
+	-- end, { description = "Lower backlight brightness", group = "System" }),
 	awful.key({}, "XF86AudioPlay", function(c)
 		awful.spawn("playerctl play-pause")
 	end, { description = "Play / Pause audio", group = "System" }),

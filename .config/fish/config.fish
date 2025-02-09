@@ -4,10 +4,14 @@ if status is-interactive
     fish_vi_key_bindings
 end
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if test -f /home/anhuar/anaconda3/bin/conda
-    eval /home/anhuar/anaconda3/bin/conda "shell.fish" "hook" $argv | source
-end
-# <<< conda initialize <<<
-
+zoxide init fish --cmd cd | source
+alias ls="exa --icons --colour=always"
+alias la="exa --icons --colour=always -la"
+alias vi="nvim"
+alias pacman="sudo pacman"
+alias upgrade-system="sudo pacman -Syu --needed"
+alias copilot="gh copilo"
+alias gcs="gh copilot suggest"
+alias gce="gh copilot explain"
+alias diff="delta"
+alias cat="bat --theme=ansi"

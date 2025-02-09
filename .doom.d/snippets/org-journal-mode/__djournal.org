@@ -1,0 +1,60 @@
+# -*- mode: snippet -*-
+# key: __jd
+# name: Daily Journal Template
+# --
+*  Morning
+** Difference from yesterday
+
+** What is my main focus for today?
+ -
+
+** Today's Growth Commitments
+*** One small step I'll take toward my goals:
+-
+*** One comfort zone I'll challenge today:
+-
+
+* Evening
+
+
+** Emotional Awareness (3 minutes)
+
+*** What emotions did I experience today? What might have caused them?
+-
+*** How can I better manage these emotions in the future?
+-
+
+
+** Daily Affirmation (1 minute)
+
+*** Write one positive statement about yourself or your day:
+-
+*** Write something that makes you feel secured:
+-
+
+** Learning & Growth
+*** What I learned today?*
+-
+*** Challenges faced:*
+-
+*** How I overcame them?*
+-
+
+** Accomplishments
+ -
+
+** Self-Reflection
+*** What went well?
+-
+*** One thing I'll do different tomorrow:
+-
+
+** Gratitude Corner
+*** What am I grateful for? :)
+-
+
+*** A small win worth celebrating:*
+-
+
+** Personal Notes
+  -

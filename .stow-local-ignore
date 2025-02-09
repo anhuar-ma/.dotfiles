@@ -4,3 +4,4 @@ misc
 ^/.*\.org
 ^/README.*
 ^/packages.*
+^/debuggin.h

@@ -21,3 +21,6 @@ chsh -s $(which fish)
 #Installing doom emacs
 git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
 ~/.config/emacs/bin/doom install
+
+#making debuggin.h available system wide
+sudo cp debuggin.h /usr/local/include/

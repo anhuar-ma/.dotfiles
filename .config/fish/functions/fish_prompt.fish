@@ -19,15 +19,5 @@ function fish_prompt --description 'Informative prompt'
 echo -n (set_color ffb600)(prompt_pwd --full-length-dirs=3 --dir-length=3)" "(set_color red)'🔥'(set_color 0091FF)'🌊'(set_color 00FF00)'🍀 '
     set_color normal
     end
-    alias ls="exa --icons --colour=always"
-    alias la="exa --icons --colour=always -la"
-    alias vi="nvim"
-    alias pacman="sudo pacman"
-    alias upgrade-system="sudo pacman -Syu --needed"
-    alias copilot="gh copilo"
-    alias gcs="gh copilot suggest"
-    alias gce="gh copilot explain"
-    alias diff="delta"
-    alias cat="bat --theme=ansi"
-end
 
+end

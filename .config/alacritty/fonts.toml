@@ -1,13 +1,13 @@
 [font]
-size = 11
+size = 12.8
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
-style = "SemiBold"
+style = "Bold"
 
 [font.bold_italic]
 family = "JetBrainsMono Nerd Font"
-style = "SemiBold"
+style = "Bold"
 
 [font.italic]
 family = "JetBrainsMono Nerd Font"
