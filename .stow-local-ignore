@@ -1,0 +1,9 @@
+\.git
+misc
+#LICENSE
+^/.*\.org
+^/README.*
+^/packages.*
+^/debuggin.h
+^/split-monitor-workspaces
+^/.config/misc

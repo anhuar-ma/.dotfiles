@@ -1,0 +1,211 @@
+# ==============================================================================
+# Dotfiles .gitignore
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Security & Secrets (Never commit credentials, keys, or private tokens)
+# ------------------------------------------------------------------------------
+.env
+.env.*
+*.env
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.pkcs12
+*.kdbx
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+id_ecdsa
+id_ecdsa.pub
+id_dsa
+id_dsa.pub
+secrets.yaml
+secrets.json
+credentials.json
+client_secret*.json
+*.token
+*token*.json
+*token*.txt
+.netrc
+.npmrc
+.opencommit
+.copilot*
+
+# ------------------------------------------------------------------------------
+# 2. Shell & Terminal Runtime State
+# ------------------------------------------------------------------------------
+# Fish universal variables (may contain machine-specific paths, tokens, or flags)
+fish_variables
+**/fish_variables
+fish_variables.bak*
+
+# Shell histories
+.*_history
+*_history
+.lesshst
+.node_repl_history
+.python_history
+.gdb_history
+.lldb_history
+
+# ------------------------------------------------------------------------------
+# 3. Editors & IDEs
+# ------------------------------------------------------------------------------
+# Vim / Neovim swap, undo, sessions, and state
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+*.swp
+*.swo
+*.swn
+*.un~
+.undo/
+*~
+[sS]ession.vim
+*.Session.vim
+*.shada
+*.shada.*
+shada/
+*.viminfo
+.netrwhist
+
+# Neovim scratch, test, tags & logs (from nvim configs)
+.config/nvim/tt.*
+.config/nvim/foo.*
+.config/nvim/.tests/
+.config/nvim/debug/
+.config/nvim/.repro/
+.config/nvim/doc/tags
+.config/nvim/data/
+mason.log
+lsp.log
+
+# Doom Emacs / Emacs
+\#*\#
+.\#*
+.#*
+*.elc
+*-autoloads.el
+.config/doom/.local/
+.config/doom/.cache/
+.config/doom/etc/
+
+# VS Code & JetBrains
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# ------------------------------------------------------------------------------
+# 4. Build Artifacts & Language Caches
+# ------------------------------------------------------------------------------
+# C / C++
+*.o
+*.obj
+*.a
+*.la
+*.dylib
+*.dll
+*.exe
+*.out
+a.out
+compile_commands.json
+.cache/
+.clangd/
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+
+# Preserve tracked split-monitor-workspaces shared library
+!split-monitor-workspaces/split-monitor-workspaces.so
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+ENV/
+
+# Node / JS
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Rust
+target/
+
+# ------------------------------------------------------------------------------
+# 5. Backups, Patches & Logs
+# ------------------------------------------------------------------------------
+# Generated timestamped backups (e.g. from fish backup function: *.bak.YYYYMMDD-HHMMSS)
+*.bak.*
+# Standard backup, patch, and temp files
+*.orig
+*.rej
+*.backup
+*.old
+*.tmp
+*.temp
+
+# General log files
+*.log
+
+# ------------------------------------------------------------------------------
+# 6. Operating System & Filesystem Junk
+# ------------------------------------------------------------------------------
+# Linux
+.Trash-*
+lost+found/
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# ------------------------------------------------------------------------------
+# 7. Window Manager, Sockets & Core Dumps
+# ------------------------------------------------------------------------------
+*.sock
+core
+core.*
+vgcore.*
+
+# ------------------------------------------------------------------------------
+# 8. Custom Ignored Directories & Machine-Specific Local Overrides
+# ------------------------------------------------------------------------------
+# User custom ignore directories
+**/ignore/
+
+# Explicit machine-specific overrides (Note: Avoided `*.local` wildcard to protect `.local/`)
+*.local.conf
+*.local.fish
+*.local.lua
+*.local.json
+*.local.yaml
+*.local.toml
+local.conf
+local.fish
+local.lua
+
+# ------------------------------------------------------------------------------
+# 9. Other
+# ------------------------------------------------------------------------------
+
+xournalpp/settings.xml

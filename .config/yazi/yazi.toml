@@ -1,0 +1,82 @@
+# Best-practice Yazi configuration for a macOS/dev workflow.
+# Yazi merges this with its built-in defaults, so this file only overrides
+# choices that materially improve day-to-day use.
+
+[mgr]
+# Comfortable 3-pane layout: parent / current / preview.
+ratio = [1, 4, 3]
+sort_by = "natural"
+sort_sensitive = false
+sort_reverse = false
+sort_dir_first = true
+sort_translit = true
+linemode = "size"
+show_hidden = true 
+show_symlink = true
+scrolloff = 8
+mouse_events = ["click", "scroll", "touch"]
+
+[preview]
+wrap = "yes"
+tab_size = 2
+# Good balance for modern terminals: clear images without huge caches.
+max_width = 1600
+max_height = 1600
+image_delay = 40
+image_filter = "lanczos3"
+image_quality = 80
+
+[opener]
+edit = [
+  { run = '${EDITOR:-vim} %s', block = true, for = "unix", desc = "Edit" },
+]
+open = [
+  { run = 'open %s', orphan = true, for = "macos", desc = "Open" },
+  { run = 'xdg-open %s', orphan = true, for = "linux", desc = "Open" },
+]
+reveal = [
+  { run = 'open -R %s1', orphan = true, for = "macos", desc = "Reveal in Finder" },
+]
+quicklook = [
+  { run = 'qlmanage -p %s >/dev/null 2>&1', orphan = true, for = "macos", desc = "Quick Look" },
+]
+play = [
+  { run = 'mpv %s', orphan = true, for = "unix", desc = "Play" },
+]
+extract = [
+  { run = 'unar %s', desc = "Extract with unar", for = "unix" },
+  { run = '7zz x %s', desc = "Extract with 7-Zip", for = "unix" },
+]
+
+[open]
+# Keep Yazi defaults, but put these practical dev/macOS rules first.
+prepend_rules = [
+  { url = "*.{md,markdown,txt,toml,yaml,yml,json,js,ts,tsx,jsx,rs,go,py,rb,java,kt,sh,fish,zsh,bash,sql,xml,html,css,scss,less,lua,vim}", use = ["edit", "open"] },
+  { url = "*.{png,jpg,jpeg,gif,webp,heic,svg,pdf}", use = ["quicklook", "open"] },
+  { mime = "{audio,video}/*", use = ["play", "open"] },
+  { url = "*.{zip,tar,gz,bz2,xz,7z,rar}", use = ["extract", "open"] },
+]
+append_rules = [
+  { url = "*", use = ["open", "edit"] },
+]
+
+[tasks]
+file_workers = 6
+plugin_workers = 6
+fetch_workers = 8
+preload_workers = 8
+process_workers = 8
+bizarre_retry = 3
+suppress_preload = true
+# Avoid one giant image eating memory while browsing.
+image_alloc = 536870912
+image_bound = [10000, 10000]
+
+[input]
+cursor_blink = true
+
+[which]
+sort_by = "key"
+sort_sensitive = false
+sort_reverse = false
+sort_translit = true

@@ -1,0 +1,238 @@
+
+/* ~/.config/ironbar/style.css
+ * Modern minimal ironbar theme — Catppuccin Mocha-inspired palette,
+ * rounded corners, subtle transparency, soft shadows.
+ *
+ * Required:
+ *   - GTK 3
+ *   - Font:  "JetBrainsMono Nerd Font"   (https://www.nerdfonts.com/)
+ *   - Icons: "Papirus-Dark"              (sudo pacman -S papirus-icon-theme)
+ *
+ * Optional helpers used by config.toml:
+ *   rofi, wlogout, NetworkManager, PipeWire/PulseAudio
+ */
+
+/* ─── Palette ─────────────────────────────────────────────────────── */
+@define-color base       rgba(30, 30, 46, 0.78);   /* #1e1e2e + alpha */
+@define-color surface    rgba(49, 50, 68, 0.90);   /* #313244        */
+@define-color overlay    rgba(69, 71, 90, 0.95);   /* #45475a        */
+@define-color text       #cdd6f4;
+@define-color subtext    #a6adc8;
+@define-color accent     #89b4fa;                  /* blue           */
+@define-color accent2    #cba6f7;                  /* mauve          */
+@define-color ok         #a6e3a1;
+@define-color warn       #f9e2af;
+@define-color danger     #f38ba8;
+
+/* ─── Global reset ────────────────────────────────────────────────── */
+* {
+    font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    transition: background-color 200ms ease, color 200ms ease,
+                box-shadow 200ms ease, opacity 200ms ease;
+}
+
+/* ─── Bar container ───────────────────────────────────────────────── */
+.bar {
+    background: transparent;       /* outer is transparent; .background carries the look */
+    color: @text;
+}
+
+.background {
+    background: @base;
+    border-radius: 14px;
+    margin: 6px 10px;
+    padding: 0 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Sections */
+.container.start  { margin-left: 4px; }
+.container.center { }
+.container.end    { margin-right: 4px; }
+
+/* Generic widget chip */
+.widget,
+.label,
+.clock,
+.volume,
+.networkmanager,
+.battery,
+.clipboard,
+.sys_info,
+.tray,
+.menu,
+.custom {
+    background: @surface;
+    color: @text;
+    padding: 2px 10px;
+    margin: 5px 3px;
+    border-radius: 10px;
+}
+
+.widget:hover,
+.label:hover {
+    background: @overlay;
+}
+
+/* ─── Menu (distro icon) ──────────────────────────────────────────── */
+.menu {
+    color: @accent;
+    font-size: 16px;
+    padding: 2px 12px;
+}
+.menu:hover { color: @accent2; }
+
+/* ─── Launcher (taskbar) ──────────────────────────────────────────── */
+.launcher {
+    background: @surface;
+    margin: 5px 3px;
+    padding: 2px 4px;
+    border-radius: 10px;
+}
+.launcher .item {
+    background: transparent;
+    color: @subtext;
+    padding: 2px 8px;
+    margin: 0 1px;
+    border-radius: 8px;
+}
+.launcher .item.focused,
+.launcher .item.active { background: @overlay; color: @text; }
+.launcher .item.urgent { background: @danger; color: @base; }
+
+/* ─── Workspaces ──────────────────────────────────────────────────── */
+.workspaces {
+    background: @surface;
+    margin: 5px 3px;
+    padding: 2px 4px;
+    border-radius: 10px;
+}
+
+.workspaces .item {
+    background: transparent;
+    color: @subtext;
+    padding: 2px 9px;
+    margin: 0 1px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.workspaces .item:hover {
+    background: @overlay;
+    color: @text;
+}
+
+.workspaces .item.focused,
+.workspaces .item.active {
+    background: @accent;
+    color: @base;
+    box-shadow: 0 0 8px alpha(@accent, 0.55);
+}
+
+.workspaces .item.urgent {
+    background: @danger;
+    color: @base;
+}
+
+/* ─── Clock ───────────────────────────────────────────────────────── */
+.clock {
+    color: @text;
+    font-weight: 600;
+    padding: 2px 14px;
+}
+.clock:hover { color: @accent; }
+
+/* ─── Volume ──────────────────────────────────────────────────────── */
+.volume                { color: @ok; }
+.volume.muted          { color: @danger; }
+.volume:hover          { background: @overlay; }
+
+/* ─── Network ─────────────────────────────────────────────────────── */
+.networkmanager        { color: @accent; }
+.networkmanager.disconnected { color: @danger; }
+
+/* ─── Battery ─────────────────────────────────────────────────────── */
+.battery               { color: @ok; }
+.battery.low,
+.battery.critical      { color: @danger; }
+.battery.charging      { color: @accent; }
+
+/* ─── Clipboard ───────────────────────────────────────────────────── */
+.clipboard             { color: @subtext; }
+.clipboard:hover       { color: @text; }
+
+/* ─── System info ─────────────────────────────────────────────────── */
+.sys_info { color: @warn; }
+
+/* ─── Tray ────────────────────────────────────────────────────────── */
+.tray { padding: 0 6px; }
+.tray menuitem { padding: 4px 8px; }
+
+/* ─── Power menu (custom widget) ─────────────────────────────────── */
+.power-menu {
+    padding: 0;
+}
+.power-menu #power-btn {
+    background: transparent;
+    color: @danger;
+    padding: 2px 12px;
+    font-size: 14px;
+    border-radius: 10px;
+}
+.power-menu #power-btn:hover { background: alpha(@danger, 0.18); }
+
+.power-menu .popup #header {
+    color: @subtext;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.power-menu .popup #buttons { /* row of action buttons */ }
+.power-menu .popup .power-btn {
+    background: @surface;
+    color: @text;
+    font-size: 18px;
+    padding: 8px 14px;
+    margin: 0 4px;
+    border-radius: 10px;
+}
+.power-menu .popup .power-btn:hover {
+    background: @danger;
+    color: @base;
+}
+
+/* ─── Popups (clock calendar, volume slider, etc.) ───────────────── */
+.popup {
+    background: @base;
+    color: @text;
+    border-radius: 12px;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+.popup label { background: transparent; }
+
+/* GTK scale used by volume popup */
+scale trough {
+    background: @overlay;
+    border-radius: 6px;
+    min-height: 6px;
+}
+scale highlight {
+    background: @accent;
+    border-radius: 6px;
+}
+scale slider {
+    background: @text;
+    border-radius: 50%;
+    min-width: 14px;
+    min-height: 14px;
+    margin: -4px;
+}
+

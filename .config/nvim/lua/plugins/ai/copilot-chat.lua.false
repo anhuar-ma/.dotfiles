@@ -1,0 +1,17 @@
+-- lua/plugins/ai/copilot-chat.lua
+-- CopilotChat.nvim: chat interface for GitHub Copilot. Migrated from the
+-- previous config. `make tiktoken` builds the token counter (Linux/macOS).
+return {
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "nvim-lua/plenary.nvim", branch = "master" },
+    },
+    build = "make tiktoken",
+    opts = {
+      sticky = { "#buffer" },
+      -- model = {"gpt-5.4-mini"},
+      -- See Configuration section for options
+    },
+  },
+}

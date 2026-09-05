@@ -1,0 +1,152 @@
+# A calm, high-contrast theme that works well in dark terminals.
+# If you use a Yazi flavor later, flavor settings can override most of this.
+
+[app]
+overall = { bg = "reset" }
+
+[mgr]
+cwd = { fg = "cyan", bold = true }
+# Highlight the current line (hovered file) across the full row width.
+# Using only a bg keeps each file's own color while marking the active row.
+hovered = { bg = "#3b4261", bold = true }
+# Mark the focused row in the preview pane too.
+preview_hovered = { bg = "#3b4261", underline = true }
+find_keyword = { fg = "black", bg = "yellow", bold = true }
+find_position = { fg = "magenta", bold = true }
+symlink_target = { fg = "gray", italic = true }
+marker_copied = { fg = "green", bold = true }
+marker_cut = { fg = "red", bold = true }
+marker_marked = { fg = "magenta", bold = true }
+marker_selected = { fg = "yellow", bold = true }
+count_copied = { fg = "green", bold = true }
+count_cut = { fg = "red", bold = true }
+count_selected = { fg = "yellow", bold = true }
+border_symbol = "│"
+border_style = { fg = "darkgray" }
+
+[indicator]
+parent = { fg = "darkgray" }
+# The current/focused column gets a bright, filled marker so it's obvious
+# which pane (column) you're working in.
+current = { fg = "black", bg = "cyan", bold = true }
+preview = { fg = "darkgray" }
+padding = { open = "", close = "" }
+
+[tabs]
+active = { fg = "black", bg = "cyan", bold = true }
+inactive = { fg = "gray", bg = "reset" }
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
+
+[mode]
+normal_main = { fg = "black", bg = "cyan", bold = true }
+normal_alt = { fg = "cyan", bg = "darkgray" }
+select_main = { fg = "black", bg = "yellow", bold = true }
+select_alt = { fg = "yellow", bg = "darkgray" }
+unset_main = { fg = "black", bg = "magenta", bold = true }
+unset_alt = { fg = "magenta", bg = "darkgray" }
+
+[status]
+overall = { fg = "white", bg = "reset" }
+sep_left = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+perm_type = { fg = "cyan" }
+perm_read = { fg = "yellow" }
+perm_write = { fg = "red" }
+perm_exec = { fg = "green" }
+perm_sep = { fg = "darkgray" }
+progress_label = { fg = "white", bold = true }
+progress_normal = { fg = "cyan" }
+progress_error = { fg = "red" }
+
+[which]
+cols = 3
+mask = { bg = "black" }
+cand = { fg = "cyan", bold = true }
+rest = { fg = "gray" }
+desc = { fg = "white" }
+separator = "  "
+separator_style = { fg = "darkgray" }
+
+[confirm]
+border = { fg = "yellow" }
+title = { fg = "yellow", bold = true }
+body = { fg = "white" }
+list = { fg = "cyan" }
+btn_yes = { fg = "black", bg = "red", bold = true }
+btn_no = { fg = "black", bg = "green", bold = true }
+btn_labels = [" yes ", " no "]
+
+[spot]
+border = { fg = "cyan" }
+title = { fg = "cyan", bold = true }
+tbl_col = { fg = "cyan" }
+tbl_cell = { fg = "yellow" }
+
+[notify]
+title_info = { fg = "cyan", bold = true }
+title_warn = { fg = "yellow", bold = true }
+title_error = { fg = "red", bold = true }
+
+[pick]
+border = { fg = "cyan" }
+active = { fg = "black", bg = "cyan", bold = true }
+inactive = { fg = "white" }
+
+[input]
+border = { fg = "cyan" }
+title = { fg = "cyan", bold = true }
+value = { fg = "white" }
+selected = { fg = "black", bg = "yellow" }
+
+[cmp]
+border = { fg = "cyan" }
+active = { fg = "black", bg = "cyan", bold = true }
+inactive = { fg = "white" }
+icon_file = "󰈔"
+icon_folder = "󰉋"
+icon_command = ""
+
+[tasks]
+border = { fg = "cyan" }
+title = { fg = "cyan", bold = true }
+hovered = { fg = "black", bg = "cyan" }
+
+[help]
+on = { fg = "cyan", bold = true }
+run = { fg = "yellow" }
+desc = { fg = "white" }
+hovered = { fg = "black", bg = "cyan" }
+footer = { fg = "gray" }
+
+[filetype]
+rules = [
+  { mime = "image/*", fg = "yellow" },
+  { mime = "{audio,video}/*", fg = "magenta" },
+  { mime = "application/{zip,gzip,x-tar,x-bzip,x-bzip2,x-7z-compressed,x-rar}", fg = "red" },
+  { mime = "application/{json,xml}", fg = "green" },
+  { mime = "text/*", fg = "white" },
+  { url = "*.{md,markdown}", fg = "cyan" },
+  { url = "*", is = "exec", fg = "green", bold = true },
+  { url = "*", is = "orphan", fg = "red", crossed = true },
+  { url = "*", is = "link", fg = "cyan", italic = true },
+  { url = "*/", fg = "blue", bold = true },
+  { url = "*", fg = "white" },
+]
+
+[icon]
+# Keep icons simple and broadly compatible; Yazi's built-in nvim-web-devicons
+# still handles the vast majority of filetypes.
+prepend_dirs = [
+  { name = "workplace", text = "W", fg = "#ff9900" },
+  { name = ".aki", text = "A", fg = "#00afff" },
+  { name = ".config", text = "C", fg = "#7aa2f7" },
+]
+prepend_files = [
+  { name = "README.md", text = "R", fg = "#00afff" },
+  { name = "TODO.md", text = "T", fg = "#ffff00" },
+]
+prepend_exts = [
+  { name = "fish", text = "F", fg = "#4e9a06" },
+  { name = "toml", text = "T", fg = "#9ece6a" },
+]

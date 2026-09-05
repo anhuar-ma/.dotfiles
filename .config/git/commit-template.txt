@@ -1,0 +1,51 @@
+# Conventional Commits — https://www.conventionalcommits.org/en/v1.0.0/
+#
+# Format:  <type>(<optional scope>)<!>: <subject>
+# Example: feat(auth): add OAuth2 login flow
+#          fix(api)!: drop deprecated /v1 endpoints
+#
+# Subject line (required): "If applied, this commit will ___"
+# |<----  Using a Maximum Of 50 Characters  ---->|
+
+
+# Body (optional) — explain the WHAT and WHY, not the HOW.
+# Leave one blank line between subject and body.
+# |<----   Try To Limit Each Line to a Maximum Of 72 Characters   ---->|
+
+
+# Footer (optional) — metadata, one item per line.
+#   Refs: KEYSTONEDEV-23
+#   Closes: #42
+#   Reviewed-by: Some One <some@one.com>
+#   BREAKING CHANGE: <describe the incompatible change and migration path>
+#
+# A commit is "breaking" if it has a BREAKING CHANGE footer OR a `!`
+# after the type/scope (e.g. `refactor!:`). Breaking changes bump the
+# MAJOR version under semver and can appear on any commit type.
+
+
+# ------------------------------ COMMIT END ------------------------------
+# Type (pick one; first three cover 90% of commits):
+#   feat      a new feature visible to users
+#   fix       a bug fix
+#   refactor  code change that neither fixes a bug nor adds a feature
+#
+#   perf      performance improvement
+#   docs      documentation only
+#   test      adding or fixing tests
+#   build     build system or external dependencies (npm, cargo, gradle...)
+#   ci        CI configuration and scripts
+#   chore     housekeeping, tooling, repo maintenance
+#   style     formatting, whitespace, semicolons (no code change)
+#   revert    revert a previous commit (include the reverted hash in body)
+#
+# Scope (optional): a noun naming the area of code, e.g. (auth), (api), (ui).
+#
+# Rules:
+#   - Use the imperative mood: "add", not "added" or "adds"
+#   - Lowercase the subject; do not end it with a period
+#   - Keep the subject under 50 chars; hard-wrap the body at 72
+#   - Leave a blank line between subject, body, and footer
+#   - Explain WHY in the body; the diff already shows WHAT
+#   - Use `-` for bullet points in the body when listing things
+#

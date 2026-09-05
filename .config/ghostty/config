@@ -1,0 +1,61 @@
+# Dynamic theme colors
+config-file = ?"~/.config/omarchy/current/theme/ghostty.conf"
+# Ensure clipboard writing is allowed (usually default)
+clipboard-write = allow
+clipboard-read = allow
+
+# Font
+# font-family = "Noto Emoji"
+font-family = "JetBrainsMono Nerd Font"
+font-family = "Noto Emoji"
+# freetype-load-flags = monochrome
+# Try disabling common color features
+# font-feature = -colr
+# font-feature = -svg
+# emoji-presentation = text
+
+# freetype-load-flags = monochrome
+
+# Set "SemiBold" as the default (normal) text weight
+font-style = SemiBold
+
+# Define specific styles for bold and italic
+font-style-bold = Bold
+font-style-italic = Italic
+
+# Example: bind Ctrl+t to new tab (even on macOS)
+# keybind = ctrl+t=new_tab
+
+# Window
+window-theme = ghostty
+window-padding-x = 4
+window-padding-y = 4
+confirm-close-surface=false
+resize-overlay = never
+gtk-toolbar-style = flat
+window-padding-balance = true 
+# window-padding-color = extend
+
+# Cursor styling
+cursor-style = "bar"
+cursor-style-blink = false
+
+# Cursor styling + SSH session terminfo
+# (all shell integration options must be passed together)
+shell-integration-features = no-cursor,ssh-env
+
+# Keyboard bindings
+keybind = shift+insert=paste_from_clipboard
+keybind = control+insert=copy_to_clipboard
+keybind = super+control+shift+alt+arrow_down=resize_split:down,100
+keybind = super+control+shift+alt+arrow_up=resize_split:up,100
+keybind = super+control+shift+alt+arrow_left=resize_split:left,100
+keybind = super+control+shift+alt+arrow_right=resize_split:right,100
+
+# Slowdown mouse scrolling
+mouse-scroll-multiplier = 0.95
+
+# command = tmux
+
+# Fix general slowness on hyprland (https://github.com/ghostty-org/ghostty/discussions/3224)
+async-backend = epoll

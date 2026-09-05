@@ -1,0 +1,34 @@
+CompileFlags:
+  Add:
+    - "-std=c++23"
+    # Essential warnings to catch logic errors
+    - "-Wall"
+    - "-Wextra"
+    - "-Wshadow"
+    # - "-Wconversion"
+    # Crucial for catching out-of-bounds array/vector access locally
+    - "-D_GLIBCXX_ASSERTIONS"
+
+Diagnostics:
+  ClangTidy:
+    Add:
+      # - "bugprone-*"
+      - "modernize-*"
+      - "performance-*"
+      - "readability-*"
+    Remove:
+      # These checks are usually too annoying for rapid algorithm solving
+      - "modernize-use-trailing-return-type" # Forces auto func() -> int
+      - "readability-magic-numbers"          # Complains if you use numbers like '4' directly
+      - "readability-identifier-length"      # Complains about variable names like 'i', 'j', 'n'
+      - "readability-braces-around-statements" # Complains about 1-line if statements without {}
+  
+  # Suppress specific noisy clangd warnings
+  Suppress: 
+    - "unused-includes" # Can sometimes be buggy and falsely flag needed headers
+
+Index:
+  Background: Build # Ensures clangd indexes your files in the background for faster autocomplete
+
+Hover:
+  ShowAKA: Yes # Shows "Also Known As" for complex typedefs (helpful for nested data structures)

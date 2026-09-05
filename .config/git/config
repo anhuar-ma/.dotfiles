@@ -1,0 +1,283 @@
+[user]
+	# Identity stamped on every commit. Change per-repo with `git config user.email ...`
+	name = Archi
+  email = exmaple@com
+
+[init]
+	# Name used for the initial branch of new repos (`git init`).
+	# "main" is the modern convention across GitHub/GitLab/etc.
+	defaultBranch = main
+
+[core]
+	# Pager flags:
+	#   -F: quit immediately if output fits on one screen (no paging for short diffs)
+	#   -R: pass through color escape codes so `git diff` stays colored
+	#   -X: don't clear the screen on exit (output stays visible in terminal)
+	pager = delta
+
+	# Warn when committing these whitespace issues:
+	#   trailing-space: spaces/tabs at end of line
+	#   space-before-tab: a space immediately before a tab in indentation
+	whitespace = trailing-space,space-before-tab
+
+	# Filesystem monitor (Git 2.37+). Dramatically speeds up `git status`
+	# and other commands on large repos by avoiding full working-tree scans.
+	fsmonitor = true
+
+	# Caches "which dirs have untracked files" between runs. Pairs with fsmonitor
+	# to make status near-instant on big repos.
+	untrackedCache = true
+
+	# macOS filesystems decompose Unicode filenames. This keeps them composed
+	# so filenames stay consistent across macOS/Linux. Harmless on Linux.
+	precomposeUnicode = true
+
+[column]
+	# Let Git format multi-item output (like `git branch`) into columns
+	# when writing to a terminal. Falls back to one-per-line when piped.
+	ui = auto
+
+[branch]
+	# Order `git branch` output by most recently committed first
+	# instead of alphabetically. Much easier to find what you just worked on.
+	sort = -committerdate
+
+[tag]
+	# Sort tags as version numbers, so v1.10 comes after v1.9 (not before it).
+	sort = version:refname
+
+[pull]
+	# `git pull` does fetch + rebase instead of fetch + merge.
+	# Keeps history linear, avoids noisy "Merge branch 'main'" commits.
+	rebase = true
+
+[push]
+	# On first push of a new branch, automatically set the upstream
+	# so you don't need `git push -u origin <branch>` the first time.
+	autoSetupRemote = true
+
+	# When pushing a commit, also push any annotated tags that point
+	# to commits being pushed. Lightweight tags are still skipped.
+	followTags = true
+
+[fetch]
+	# Delete local remote-tracking branches (origin/foo) whose upstream
+	# branch was deleted on the remote. Keeps `git branch -a` clean.
+	prune = true
+
+	# Same idea but for tags that no longer exist on the remote.
+	pruneTags = true
+
+	# `git fetch` without args fetches from all remotes, not just origin.
+	all = true
+
+[rebase]
+	# Auto-stash dirty working tree before a rebase and pop it after.
+	# Lets you rebase without manually stashing first.
+	autoStash = true
+
+	# Honor `fixup!` / `squash!` commit messages automatically during
+	# interactive rebase — no need to manually reorder them.
+	autoSquash = true
+
+	# When rebasing, also move any other local branches that pointed at
+	# commits being rebased. Huge QoL for stacked-branch workflows. (Git 2.38+)
+	updateRefs = true
+
+[rerere]
+	# "Reuse recorded resolution": remember how you resolved a conflict
+	# and auto-apply the same resolution if the exact same conflict
+	# shows up again (common during repeated rebases).
+	enabled = true
+
+	# Automatically stage conflict hunks that rerere resolved for you.
+	autoUpdate = true
+
+[merge]
+	# Conflict marker style:
+	#   zdiff3 = diff3 but hides common lines inside the conflict block.
+	# Shows the common ancestor alongside "ours" and "theirs",
+	# which makes non-trivial conflicts much easier to reason about.
+	conflictStyle = zdiff3
+
+	# Default tool launched by `git mergetool`.
+	tool = vscode
+
+[mergetool]
+	# Don't leave *.orig backup files sitting around after merges.
+	keepBackup = false
+
+	# Don't ask "Hit return to launch 'vscode'..." before every file.
+	prompt = false
+
+[mergetool "vscode"]
+	# How to invoke VS Code as a 3-way merge tool.
+	# $MERGED is the file Git expects the resolved result written to.
+	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
+
+[diff]
+	# Default tool launched by `git difftool`.
+	tool = vscode
+	# Histogram algorithm produces more readable diffs than the default
+	# Myers algorithm, especially for code with moved/reordered blocks.
+	algorithm = histogram
+
+	# Color moved lines differently from added/removed lines so you can
+	# tell "this was relocated" from "this was rewritten". "zebra" alternates
+	# shades for adjacent moved blocks.
+	colorMoved = zebra
+
+	# Don't treat pure indentation changes as breaking a move detection
+	# (e.g. wrapping a block in an `if` still shows the body as "moved").
+	colorMovedWS = allow-indentation-change
+
+	# Use i/w/c prefixes (index/worktree/commit) in diff headers instead
+	# of a/b. Makes it obvious which side is which when reading patches.
+	mnemonicPrefix = true
+
+	# Detect renames, and also detect copies (file A was copied to B).
+	# Slightly slower but much clearer diffs on refactors.
+	renames = copies
+
+[commit]
+	# Prefill commit messages from this template (create the file or remove this line).
+	template = ~/.config/git/commit-template.txt
+
+	# Strip trailing whitespace and collapse consecutive blank lines
+	# from commit messages before saving.
+	cleanup = strip
+
+	# Show the full staged diff in the editor below the commit message.
+	# Great for sanity-checking what you're actually committing.
+	verbose = true
+
+[log]
+	# Render dates in your local timezone in a sortable ISO-like format
+	# (e.g. 2026-04-30 14:22:10). No more deciphering "Mon Apr 30...".
+	date = iso-local
+
+[status]
+	# Inside an untracked directory, list every file instead of just the
+	# directory name. Avoids the "untracked dir hiding 50 new files" trap.
+	showUntrackedFiles = all
+
+	# Show current branch name (and ahead/behind counts) in `git status`.
+	branch = true
+
+	# Show stash count in `git status` so you don't forget about stashed work.
+	showStash = true
+
+[help]
+	# On typos like `git stauts`, suggest the correct command and wait for
+	# you to confirm instead of auto-running it after a delay.
+	autocorrect = prompt
+
+[color]
+	# Colorize output when writing to a terminal; plain text when piped.
+	ui = auto
+
+[color "diff-highlight"]
+	# Colors for the `diff-highlight` contrib script (if you use it)
+	# to emphasize the exact changed characters within a line.
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[difftool]
+	# Skip the "Launch 'vscode' [Y/n]?" prompt before each file.
+	prompt = false
+
+[difftool "vscode"]
+	# Use VS Code as a difftool: `git difftool --tool=vscode`
+	# $LOCAL = left side (index or commit), $REMOTE = right side (worktree or commit).
+	cmd = code --wait --diff $LOCAL $REMOTE
+
+# =============================================================================
+# Aliases — invoked as `git <alias>`.
+# A leading `!` means "run this as a shell command" instead of a git subcommand.
+# =============================================================================
+[alias]
+	# --- existing shortcuts ---
+	# Stage everything and open an editor for the commit message.
+	ac = !git add . && git commit
+	# Stage everything and amend onto the previous commit, keeping its message.
+	amno = !git add . && git commit --amend --no-edit
+	# Diff current changes in VS Code's GUI difftool.
+	diffv = difftool --tool=vscode --no-prompt
+	dv = difftool --tool=vscode --no-prompt
+	dn = difftool --tool=nvimdiff --no-prompt
+	# Short for `git status`.
+	st = status
+
+	# --- logs ---
+	# One-line-per-commit log. Good for quick scanning.
+	lg = log --oneline
+	# Same, but includes all branches, a graph, and decorations (tags/branches).
+	lga = log --oneline --all --graph --decorate
+	# Pretty log: hash, date, author, message, refs. Short dates only.
+	ll = log --pretty=format:'%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s %C(auto)%d%Creset' --date=short
+
+	# --- inspection ---
+	# Short status with branch info (`-sb` = short + branch header).
+	s = status -sb
+	# Working-tree diff (unstaged changes).
+	d = diff
+	# Staged diff (what will go into the next commit).
+	ds = diff --staged
+	# Show the last commit with file stats.
+	last = log -1 HEAD --stat
+
+	# --- branching ---
+	ch = checkout
+	# Create and switch to a new branch in one step: `git cob feature/x`
+	chb = checkout -b
+	br = branch
+	# Top 20 most recently touched local branches, with author and relative date.
+	recent = for-each-ref --count=20 --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) %(color:green)(%(committerdate:relative))%(color:reset) %(authorname)'
+
+	# --- staging/commits ---
+	# Unstage a file (keep its changes in the working tree): `git unstage path`
+	unstage = reset HEAD --
+	# Undo the last commit but keep its changes staged, ready to re-commit.
+	undo = reset --soft HEAD~1
+	# Shorter form of `git commit --amend`.
+	amend = commit --amend
+
+	co = commit
+
+
+  
+
+	# --- safer force push ---
+	# --force-with-lease: refuse to overwrite remote work you haven't seen.
+	# --force-if-includes: additionally require your local ref to include
+	# the remote tip you fetched, catching races from parallel sessions.
+	# Use this instead of plain `git push --force`.
+	pushf = push --force-with-lease --force-if-includes
+
+	# --- syncing ---
+	# Fetch everything (pruning gone branches), then rebase current branch
+	# onto its upstream. One command to get fully up to date.
+	sync = !git fetch --all --prune && git pull --rebase
+
+	# --- cleanup ---
+	# Delete local branches already merged into HEAD, skipping the current
+	# branch (prefixed with `*`) and the usual long-lived ones.
+	cleanup = !git branch --merged | grep -vE '^\\*|^\\s*(main|master|develop)$' | xargs -r git branch -d
+
+
+	# --- open show in nvim ---
+    ; nshow = -c core.pager='nvim -R -' show
+
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
