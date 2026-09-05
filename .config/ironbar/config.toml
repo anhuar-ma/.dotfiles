@@ -1,0 +1,84 @@
+# ~/.config/ironbar/config.toml
+#
+# Ironbar configuration -- modern minimal theme with auto-hide.
+# Module shapes mirror the upstream JSON schema (https://github.com/JakeStanger/ironbar/wiki).
+#
+# Required runtime deps:
+#   - Font:  "JetBrainsMono Nerd Font" (for the glyphs below)
+#   - Icons: any GTK icon theme (default uses Adwaita)
+#   - Tools: rofi (menu), wlogout/systemctl (power menu), pipewire/pulseaudio (volume),
+#            NetworkManager (network), wl-clipboard or xclip (clipboard).
+
+# ─── Bar geometry ──────────────────────────────────────────────────────────
+position       = "bottom"
+anchor_to_edge = true
+icon_theme     = "Adwaita"
+
+# Auto-hide is a single integer = ms before the bar hides after the pointer leaves.
+# Setting it enables auto-hide; remove the line to keep the bar always visible.
+autohide = 500
+
+# ─── Start (left) ──────────────────────────────────────────────────────────
+[[start]]
+type  = "menu"
+label = "󱓞"
+
+[[start]]
+type         = "workspaces"
+sort         = "label"
+all_monitors = false
+name_map = { "1" = "1", "2" = "2", "3" = "3", "4" = "4", "5" = "5", "6" = "6", "7" = "7", "8" = "8", "9" = "9", "10" = "10", "11" = "11", "12" = "12", "13" = "13", "14" = "14", "15" = "15", "16" = "16", "17" = "17", "18" = "18", "19" = "19", "20" = "20", "21" = "1", "22" = "2", "23" = "3", "24" = "4", "25" = "5", "26" = "6", "27" = "7", "28" = "8", "29" = "9", "30" = "10", "31" = "11", "32" = "12", "33" = "13", "34" = "14", "35" = "15", "36" = "16", "37" = "17", "38" = "18", "39" = "19", "40" = "20", "41" = "1", "42" = "2", "43" = "3", "44" = "4", "45" = "5", "46" = "6", "47" = "7", "48" = "8", "49" = "9", "50" = "10", "51" = "11", "52" = "12", "53" = "13", "54" = "14", "55" = "15", "56" = "16", "57" = "17", "58" = "18", "59" = "19", "60" = "20" }
+on_click = "workspace \"{id}\""
+
+[[start]]
+type     = "launcher"
+truncate = { mode = "end", max_length = 30 }
+
+# ─── End (right) ───────────────────────────────────────────────────────────
+[[end]]
+type  = "custom"
+name  = "bluetooth"
+bar   = [
+    { type = "button", label = "󰂯", on_click = "!omarchy-launch-bluetooth" },
+]
+
+[[end]]
+type     = "sys_info"
+format   = ["󰍛 {cpu_percent}%", "🎞 {memory_percent}%"]
+interval = { cpu = 1, memory = 5 }
+
+[[end]]
+type      = "clipboard"
+max_items = 5
+truncate  = { mode = "end", length = 30 }
+
+[[end]]
+type = "volume"
+
+[[end]]
+type = "battery"
+class = "battery"
+
+# Wi-Fi: Omarchy uses iwd+impala instead of NetworkManager.
+# This custom button launches impala in a floating terminal.
+[[end]]
+type  = "custom"
+name  = "wifi-impala"
+class = "wifi-impala"
+bar   = [
+    { type = "button", label = "󰖩", on_click = "!omarchy-launch-wifi" },
+]
+
+# ─── Power menu (custom widget with popup) ─────────────────────────────────
+[[end]]
+type  = "custom"
+name  = "power-menu"
+class = "power-menu"
+bar = [
+    { type = "button", name = "power-btn", label = "", on_click = "!omarchy-menu system" },
+]
+
+[[end]]
+type         = "clock"
+format       = "%a %d %b   %H:%M"
+format_popup = "%A, %B %-d %Y -- %H:%M:%S"

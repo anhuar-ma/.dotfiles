@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Hibernate
+Comment=Hibernates the device
+Exec=systemctl hibernate
+Terminal=false
+Type=Application
+StartupNotify=true

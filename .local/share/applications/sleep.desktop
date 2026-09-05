@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Sleep
+Comment=sleeps the device
+Exec=systemctl sleep 
+Terminal=false
+Type=Application
+StartupNotify=true

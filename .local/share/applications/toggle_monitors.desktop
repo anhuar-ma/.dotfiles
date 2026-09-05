@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Toggle Monitor
+Comment=sleeps the device
+Exec=bash ~/scripts/toggle_monitor.sh
+Terminal=false
+Type=Application
+StartupNotify=true

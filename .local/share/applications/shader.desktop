@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Shaders
+Comment=Enables or disables the shaders in the hyprland config by executing the command
+Exec=bash ~/scripts/shader.sh
+Terminal=false
+Type=Application
+StartupNotify=true

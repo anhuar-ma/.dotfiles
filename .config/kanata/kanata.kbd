@@ -1,0 +1,406 @@
+;; ============================================================================
+;; kanata_tk.kbd — Linux / ThinkPad (ISO) port of kanata.kbd (macOS, ISO).
+;; ----------------------------------------------------------------------------
+;; Target  : Lenovo ThinkPad built-in keyboard (ISO layout)
+;; Physical layout : ISO (same row shapes as kanata.kbd; `102d` key present
+;;                   between left-Shift and Z)
+;; OS      : Linux
+;; Input   : U.S. layout in the OS (so `S-1 → !`, `S-[ → {`, etc.)
+;;
+;; This config mirrors kanata.kbd (the macOS version) 1:1 in behavior.
+;; The only differences from that file are the platform-specific bits:
+;;   - `macos-dev-names-include` → `linux-dev-names-include`
+;;   - macOS media aliases (`brdn`) → Linux XF86 equivalents (`brdown`)
+;;   - NAV-layer clipboard shortcuts use Ctrl (`C-z`) instead of Meta
+;;     (`M-z`), because on Linux copy/cut/paste/undo are Ctrl-based.
+;;   - Bottom-row thumb ordering uses the ThinkPad physical arrangement
+;;     `lctl lmet lalt  spc  ralt rmet` (Lenovo keeps this identical on
+;;     ANSI and ISO hardware); the Apple ISO board uses a different order,
+;;     which is why kanata.kbd's bottom row differs from this one.
+;;
+;; Everything else is unchanged from kanata.kbd:
+;;   - HRMs (A=Ctrl R=Alt S=Meta T=Shift, G=Esc on hold)
+;;   - Right-hand hold-arrows (M=↑ N=↓ E=← I=→ O=RShift)
+;;   - QWERTY HRMs (A=Ctrl S=Alt D=Meta F=Shift on left;
+;;     H=↑ J=↓ K=← L=→ ;=RShift on right)
+;;   - Layers : BASE (Colemak-DH) · NAV · SYM · QWERTY · FN · EXT
+;;   - Thumb-sticky layer access (spc→SYM, ret→NAV, one-shot on short hold)
+;;   - Tri-layer spc+ret → FN
+;;   - Colemak toggle on SYM-`C`: self-inverse toggle between Colemak-DH and
+;;     QWERTY (mirrors ZMK `&tog QWERTY`; the SYMC clone layer was removed)
+;;   - EXT layer of rarely-used keys, entered from FN, left with `to BASE`
+;;   - Top-right key: tap = Caps Word, hold = Caps Lock (ZMK `&cw_caps`)
+;;   - No combos (removed in kanata.kbd)
+;;
+;; Device name
+;; -----------
+;; "AT Translated Set 2 keyboard" is the common identifier for the internal
+;; ThinkPad keyboard. If kanata does not grab yours, run:
+;;     sudo libinput list-devices | grep -i thinkpad
+;; or
+;;     ls /dev/input/by-id
+;; and replace the name below (or leave the list empty to intercept all
+;; keyboards).
+;; ============================================================================
+
+
+(defcfg
+  process-unmapped-keys yes
+  danger-enable-cmd yes
+  concurrent-tap-hold yes            ;; allow overlapping tap-hold aliases
+  chords-v2-min-idle 150             ;; disable chord processing for 150 ms
+                                     ;; after any normal keypress, so the
+                                     ;; backspace+space NAV chord can't fire
+                                     ;; mid-typing and interfere with home-row
+                                     ;; mods / space. The chord only arms when
+                                     ;; the keyboard was idle just before it.
+  sequence-timeout 2000
+  sequence-input-mode visible-backspaced
+  sequence-backtrack-modcancel no
+  log-layer-changes no
+
+  linux-dev-names-include (
+    "AT Translated Set 2 keyboard"
+  )
+)
+
+;; ISO physical layout: row 3 and row 4 are 13 keys each (ANSI would be 14);
+;; row 5 starts with `lsft 102d` (ANSI has only `lsft`). `102d` is the
+;; scancode for the ISO extra key between left-Shift and Z.
+;;
+;; Bottom row uses the ThinkPad ordering (`lctl lmet lalt  spc  ralt rmet`)
+;; so the physical keys line up with what your hardware actually sends.
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]
+  caps a    s    d    f    g    h    j    k    l    scln '    ret
+  lsft 102d z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc             ralt rmet
+)
+
+;; ----------------------------------------------------------------------------
+;; Timings + same-hand trigger lists
+;;
+;; `same-hand-left` : left-hand keys OTHER than A/S/D/F. Pressing any of
+;;   these during a left-HRM hold window forces an early TAP (the letter)
+;;   instead of the modifier. A/S/D/F are intentionally NOT in this list so
+;;   that A+F (Ctrl+Shift), A+S (Ctrl+Alt), etc. can chord multiple mods —
+;;   matching the ZMK invariant "multi-mod chording on the left home row
+;;   must work" (KEYMAP_AI_SPEC.md §"Non-negotiable invariants" #5).
+;;
+;; `same-hand-right` : ALL right-hand keys, INCLUDING H/J/K/L/;. Unlike the
+;;   left hand, right-hand HRMs produce arrows on hold (not mods), so we do
+;;   NOT want them to chord with each other — a roll between any two of
+;;   them must always type letters. Listing them here forces an early tap
+;;   when one is pressed during another's hold window.
+;; ----------------------------------------------------------------------------
+(defvar
+  tt 250
+  ht 250
+  ht-hrm 200       ;; snappier hold timeout for A/S/D/F (left HRMs) and
+                   ;; H/J/K/L/; (right hold-arrows). Lower = easier to
+                   ;; activate the mod/arrow, but more prone to phantom
+                   ;; holds during fast typing. Raise if you start seeing
+                   ;; unwanted mods.
+
+  same-hand-left  (
+    grv 1 2 3 4 5
+    tab q w e r t
+    caps
+    lsft 102d z x c v b
+  )
+
+  ;; Right-hand HRMs (H/J/K/L/;) produce ARROWS on hold, not mods, so unlike
+  ;; the left hand we do NOT want intra-group chording — a roll between any
+  ;; two of them should always type letters, never fire an arrow. That means
+  ;; H/J/K/L/; MUST appear in this list so pressing one during another's
+  ;; hold window forces an early tap.
+  same-hand-right (
+    6 7 8 9 0 - = bspc
+    y u i o p [ ]
+    h j k l scln
+    '
+    n m , . / rsft
+  )
+)
+
+(defalias
+  ;; ---- Linux media / system keys (XF86 keycodes) ----
+  m_brdn brdown
+  m_brup brup
+  m_prev prev
+  m_pp   pp
+  m_next next
+  m_mute mute
+  m_vold vold
+  m_volu volu
+
+  ;; ---- Sticky shift (one-shot, 1 s auto-cancel) ----
+  os_lsft (one-shot 1000 lsft)
+  os_rsft (one-shot 1000 rsft)
+
+  ;; ============================================================
+  ;; Home-row mods — LEFT hand (A S D F)
+  ;;   tap  = letter
+  ;;   hold = sticky modifier (one-shot, 1 s)   ← ZMK `<&sk>, <&kp>`
+  ;;
+  ;; Hold→sticky means: press+release with no other key fires the mod
+  ;; for the NEXT single keypress only (e.g. hold-F release-tap-c → Shift+C).
+  ;; Press + another key before release acts like a normal modifier chord.
+  ;; Early-tap guard via `same-hand-left` prevents phantom mods during rolls.
+  ;;
+  ;; Assignment matches kanata.kbd (macOS):
+  ;;   A = Ctrl   S = Alt   D = Meta (Super on Linux, Cmd on mac)   F = Shift
+  ;;   G = ESC (sticky)
+  ;; ============================================================
+  hm_a (tap-hold-release-keys $tt $ht-hrm a (one-shot 1000 lctl) $same-hand-left)
+  hm_s (tap-hold-release-keys $tt $ht-hrm s (one-shot 1000 lalt) $same-hand-left)
+  hm_d (tap-hold-release-keys $tt $ht-hrm d (one-shot 1000 lmet) $same-hand-left)
+  hm_f (tap-hold-release-keys $tt $ht-hrm f (one-shot 1000 lsft) $same-hand-left)
+  hm_g (tap-hold-release-keys $tt $ht-hrm g esc  $same-hand-left)
+
+  ;; ============================================================
+  ;; Right home row — tap = letter, hold = arrow / RShift
+  ;; (ZMK BASE: &hra UP H, &hra DOWN J, &hra LEFT K, &hra RIGHT L, &hra RSHFT ;)
+  ;; ============================================================
+  hm_h  (tap-hold-release-keys $tt $ht-hrm h    up    $same-hand-right)
+  hm_j  (tap-hold-release-keys $tt $ht-hrm j    down  $same-hand-right)
+  hm_k  (tap-hold-release-keys $tt $ht-hrm k    left  $same-hand-right)
+  hm_l  (tap-hold-release-keys $tt $ht-hrm l    right $same-hand-right)
+  hm_sc (tap-hold-release-keys $tt $ht-hrm scln (one-shot 1000 rsft)  $same-hand-right)
+
+  ;; ============================================================
+  ;; Colemak-DH hold keys:
+  ;;   Top row right (hold-arrows): L=↑ U=↓ Y=← ;=→
+  ;;   Home rows (modifiers):
+  ;;     Left  : A=Ctrl R=Alt S=Meta T=Shift G=Esc
+  ;;     Right : M=Esc  N=Shift E=Meta I=Alt O=Ctrl
+  ;; ============================================================
+  cm_l  (tap-hold $tt $ht-hrm l up)
+  cm_u  (tap-hold $tt $ht-hrm u down)
+  cm_y  (tap-hold $tt $ht-hrm y left)
+  cm_sc (tap-hold $tt $ht-hrm scln right)
+
+  cm_a (tap-hold $tt $ht-hrm a (one-shot 1000 lctl))
+  cm_r (tap-hold $tt $ht-hrm r (one-shot 1000 lalt))
+  cm_s (tap-hold $tt $ht-hrm s (one-shot 1000 lmet))
+  cm_t (tap-hold $tt $ht-hrm t (one-shot 1000 lsft))
+
+  cm_m (tap-hold $tt $ht-hrm m esc)
+  cm_n (tap-hold $tt $ht-hrm n (one-shot 1000 rsft))
+  cm_e (tap-hold $tt $ht-hrm e (one-shot 1000 rmet))
+  cm_i (tap-hold $tt $ht-hrm i (one-shot 1000 ralt))
+  cm_o (tap-hold $tt $ht-hrm o (one-shot 1000 rctl))
+  
+
+
+
+
+  ;; ============================================================
+  ;; Thumb-sticky layer keys (ZMK `kp_slh`)
+  ;;   tap                             = keycode
+  ;;   hold (long)                     = momentary layer
+  ;;   short hold + release (no other) = one-shot layer for the next
+  ;;                                     single keypress, 1 s timeout
+  ;;
+  ;; Kanata impl: the hold-action is (one-shot T (layer-while-held L)).
+  ;; If another key is pressed while the thumb is down, the one-shot
+  ;; consumes it on that layer and releases; if the thumb is held long
+  ;; with other keys, it behaves exactly like a momentary hold.
+  ;; ============================================================
+  ;; spc → tap = space, hold = SYM (sticky on hold-release).
+  ;; lalt → tap = lalt, hold = NAV (sticky on hold-release).
+  ;; ============================================================
+  spc_sym  (tap-hold-release $tt $ht spc (layer-while-held sym))
+  lalt_nav  (tap-hold-release $tt $ht lalt (one-shot 1000 (layer-while-held nav)))
+
+  ;; (The old `lalt_navc` / `spc_symc` aliases are gone: after the SYMC
+  ;;  clone layer was removed, the QWERTY layer reuses the same `sym` and
+  ;;  `nav` layers as Colemak-DH, so its thumbs use @spc_sym / @lalt_nav.)
+
+  ;; Upper-right key — tap = Caps Word, hold = Caps Lock (ZMK `&cw_caps`).
+  ;;   tap  = caps-word: auto-shifts a-z and turns `-` into `_`, ending on
+  ;;          space/punctuation or after a 2 s idle timeout. This mirrors
+  ;;          ZMK's caps_word (whose continue-list keeps `_`/`-`/bspc/del
+  ;;          from terminating the word — kanata's caps-word already treats
+  ;;          `-`, bspc and del as non-terminating).
+  ;;   hold = caps (Caps Lock, like a traditional caps key).
+  ;; Uses `tap-hold` (not `-release`) so a deliberate hold reliably fires
+  ;; Caps Lock without needing another keypress. Backspace still lives on
+  ;; the left of the home row (the `caps`-position key), so repurposing this
+  ;; slot loses nothing — same arrangement as the ZMK keymap.
+  ;; tap-preferred + the explicit caps-word-custom:
+  ;;   - SHIFTED list = a-z only, so letters capitalize but `-` does NOT
+  ;;     become `_`. The minus key stays a literal hyphen during caps-word
+  ;;     (good for kebab-case names like `MAX-WIDTH`).
+  ;;   - NON-TERMINAL list = `-` plus bspc/del and arrows, so pressing `-`
+  ;;     (or Shift+`-` → `_`) does NOT end caps-word; the word continues.
+  ;;     (Shift is just a held modifier, so `_` is non-terminal too.)
+  cw_caps (tap-hold $tt $ht
+    (caps-word-custom-toggle 2000
+      (a b c d e f g h i j k l m n o p q r s t u v w x y z)
+      (lsft rsft bspc del up down left rght -))
+    caps)
+
+  ;; Colemak-DH ↔ QWERTY toggle on SYM `C`. Self-inverse: mirrors ZMK
+  ;; `&tog QWERTY` after the SYMC clone layer was removed. Checks the
+  ;; current base layer and flips to the other one.
+  ;; (`base` deflayer = Colemak-DH letters; `colemak` deflayer = QWERTY.)
+  tog_qw (switch
+    ((base-layer base)) (layer-switch colemak) break
+    ()                  (layer-switch base)    break
+  )
+
+  ;; EXT enter/leave (ZMK `&to EXT` / `&to BASE`). EXT is a toggle layer of
+  ;; rarely-used keys, entered from FN and left back to the Colemak-DH base.
+  to_ext  (layer-switch ext)
+  to_base (layer-switch base)
+
+  ;; Inside NAV/SYM, the peer thumb is replaced with this → tri-layer FN.
+  mo_fn (layer-while-held fn))
+
+;; ============================================================================
+;; LAYER 0 — BASE (Colemak-DH)
+;;
+;; Row 1 (f-row): media-key layout — brightness, f3/f4 raw, f5/f6 raw,
+;;                prev/play/next, mute, vol-, vol+. On Linux these all
+;;                generate XF86 keysyms that most desktops pick up.
+;; Row 2 (number row): number row, with the upper-right key → @cw_caps
+;;                     (tap=Caps Word, hold=Caps Lock).
+;; Row 3: q/w/e/r/t/y/u/i/o/p + [ ]   (ISO: no `\` here)
+;; Row 4: caps→plain bspc; HRMs on A/S/D/F/G; hold-arrows on H/J/K/L/;;
+;;        ret→enter(+NAV on hold, sticky-NAV on short hold).
+;; Row 5: lsft as sticky shift; 102d (ISO key) reused as grv/`; z..slash;
+;;        rsft as sticky shift.
+;; Row 6 (thumbs): lctl lmet lalt  @spc_sym  ralt rmet   (ThinkPad order)
+;; ============================================================================
+(deflayer base
+  esc      @m_brdn @m_brup f3      f4      f5      f6      @m_prev @m_pp   @m_next @m_mute @m_vold @m_volu
+  grv      1       2       3       4       5       6       7       8       9       0       -       =       @cw_caps
+  tab      q       w       f       p       b       j       @cm_l   @cm_u   @cm_y   @cm_sc  [       ]
+  bspc     @cm_a   @cm_r   @cm_s   @cm_t   @hm_g   @cm_m   @cm_n   @cm_e   @cm_i   @cm_o   '       ret
+  @os_lsft grv     x       c       d       v       z       k       h       ,       .       /       @os_rsft
+  lctl     lmet    @lalt_nav                    @spc_sym                        ralt    rmet
+)
+
+;; ============================================================================
+;; LAYER 1 — NAV  (hold Return)
+;;
+;; Left hand  : F-row for app shortcuts + clipboard (Ctrl+Z/X/C/V on
+;;              Linux — this is the only thing that differs from the macOS
+;;              config, which uses Cmd+Z/X/C/V = `M-`), and left-hand mods
+;;              mirrored so mod+numpad chords work.
+;; Right hand : numpad (7/8/9 / 4/5/6 / 1/2/3) + page nav.
+;;              Matches the updated ZMK nav: HOME→0 (home row), END→PgDn,
+;;              and the lower-right numpad row gains `*` and Enter.
+;; The ret thumb here is re-mapped to @mo_fn so "hold spc + ret" → FN.
+;; ============================================================================
+;;(deflayer nav
+;;  _        f1      f2      f3      f4      f5      f6      f7      f8      f9      f10     f11     f12
+;;  _        _       _       _       _       _       _       _       _       _       _       _       _       _
+;;  _        _       _       _       _       _       pgup    kp7     kp8     kp9     -       _       _
+;;  _        lctl    lalt    lmet    lsft    _       kp0     kp4     kp5     kp6     S-=     =       @mo_fn
+;;  _        _       C-z     C-x     C-c     C-v     pgdn    kp1     kp2     kp3     kp*     ret     _
+;;  _        _       _                       _                               _       _
+;;)
+(deflayer nav
+  _        f1      f2      f3      f4      f5      f6      f7      f8      f9      f10     f11     f12
+  _        pgup    pgdn    _       _       _       _       _       _       _       _       _       _       _
+  _        _       _       _       _       _       -       kp7     kp8     kp9     -       kp*       _
+  _        lctl    lalt    lmet    lsft    _       kp0     kp4     kp5     kp6     S-=     =     _
+  _        _       C-x     C-c     C-d     C-v     C-z     ret     kp1     kp2     kp3     _     _ 
+  _        _       _                       _                               _       _
+)
+
+
+
+
+;; ============================================================================
+;; LAYER 2 — SYM  (hold Space)
+;;
+;; LEFT HAND                          | RIGHT HAND
+;; ----------------------------------- | -----------------------------------
+;; Top  : @  #  |  ~  `               | +  {  }  '  "
+;; Home : !  %  $  ^  &               | -  (  )  =  _
+;; Bot  : _  <  >  ?  \               | *  [  ]  /  \
+;;
+;; U.S. shift chords:
+;;   S-2=@ S-3=# S-\=| S-grv=~ S-==+ S-[={ S-]=} S-'="
+;;   S-1=! S-5=% S-4=$ S-6=^ S-7=& S-9=( S-0=) S--=_
+;;   S-,=< S-.=> S-/=? S-8=*
+;; ============================================================================
+(deflayer sym
+  _           f1      f2      f3      f4      f5      f6      f7      f8      f9      f10     f11     f12
+  @tog_qw     S-1     S-2     S-3     S-4     S-5     S-6     S-7     S-8     S-9     S-0     -       S-=     _
+  _           S-2     S-3     S-\     S-grv   grv     S-=     S-[     S-]     '       S-'     _       _
+  _           S-1     S-5     S-6     S-4     S-7     -       S-9     S-0     =       S--     _       _
+  _           _       _       S-,     S-.     S-/     \       S-8     [       ]       /       \       _
+  _           _       _                       @mo_fn                          _       _
+)
+
+
+
+;; ============================================================================
+;; LAYER 3 — QWERTY (toggle via SYM `C`)
+;;
+;;   Q W E R T    Y U I O P
+;;   A S D F G    H J K L ;     ← HRMs left, hold-arrows right
+;;   Z X C V B    N M , . /
+;;
+;; Thumbs reuse the same SYM/NAV layers as Colemak-DH (no SYMC clone). The
+;; SYM `C` key (@tog_qw) is self-inverse, so it toggles back to Colemak-DH.
+;; ============================================================================
+(deflayer colemak
+  esc      @m_brdn @m_brup f3      f4      f5      f6      @m_prev @m_pp   @m_next @m_mute @m_vold @m_volu
+  grv      1       2       3       4       5       6       7       8       9       0       -       =       @cw_caps
+  tab      q       w       e       r       t       y       u       i       o       p       [       ]
+  bspc     @hm_a   @hm_s   @hm_d   @hm_f   @hm_g   @hm_h   @hm_j   @hm_k   @hm_l   @hm_sc  '       ret
+  @os_lsft grv     z       x       c       v       b       n       m       ,       .       /       @os_rsft
+  lctl     lmet    @lalt_nav               @spc_sym                        ralt    rmet
+)
+
+;; ============================================================================
+;; LAYER 4 — FN / Media  (hold spc + ret at once → tri-layer)
+;;
+;; Portable subset only: F-keys, media, brightness, volume — plus the entry
+;; to the EXT layer (@to_ext, mirroring ZMK's `&to EXT`). (Sofle-specific
+;; firmware features — bluetooth / RGB / bootloader / soft-off — have no
+;; equivalent on a laptop keyboard, so they are omitted.)
+;; ============================================================================
+(deflayer fn
+  _        f1      f2      f3      f4      f5      f6      f7      f8      @to_ext f10     f11     f12
+  _        _       _       _       _       _       _       _       _       _       _       _       _       _
+  _        _       _       _       _       _       _       @m_brdn @m_brup _       _       _       _
+  _        _       _       _       _       _       _       @m_pp   @m_mute @m_vold @m_volu _       _
+  _        _       _       _       _       _       _       _       @m_prev @m_next _       _       _
+  _        _       _                       _                               _       _
+)
+
+;; ============================================================================
+;; LAYER 5 — EXT / Special keys  (toggle in: FN layer @to_ext; leave: @to_base)
+;;
+;; The "rare" keys that the main layers have no room for: Print Screen,
+;; Scroll Lock, Pause/Break, Insert, Num Lock, the Menu/Application key, the
+;; classic Home/End/PgUp/PgDn nav block, an arrow row, Find, and lock screen.
+;; This mirrors the ZMK ext_layer. It is a TOGGLE layer (entered with
+;; @to_ext, left with @to_base) so you don't hold anything while reaching a
+;; rarely-used key. Several keys send @to_base so you're never stuck.
+;;
+;; Right-hand classic 6-key nav block mirrors a TKL:
+;;     INS  HOME  PGUP
+;;     DEL  END   PGDN
+;; with a dedicated arrow row directly below it.
+;;
+;; Notes (no direct kanata tokens for these on Linux):
+;;   - Find: kanata has no `find` key name, so we send Ctrl+F (C-f).
+;;   - Lock screen: sent as the common Super+L (M-l) shortcut.
+;; ============================================================================
+(deflayer ext
+  @to_base prnt    slck    pause   nlck    _       _       ins     home    pgup    _       _       _
+  _        f11     f12     menu    caps    _       _       del     end     pgdn    _       _       _       _
+  _        lctl    lalt    lmet    lsft    _       _       left    down    up      right   _       _
+  _        C-z     C-x     C-c     C-v     _       _       C-f     M-l     _       _       _       _
+  @m_mute  _       _       _       _       _       _       _       _       _       _       _       @to_base
+  _        _       _                       @to_base                        _       _
+)

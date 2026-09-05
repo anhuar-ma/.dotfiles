@@ -1,0 +1,620 @@
+# ==============================================================================
+# kanata.yaml — keymap-drawer specification for kanata.kbd
+# Target: Lenovo ThinkPad ISO Keyboard
+# Layers: BASE (Colemak-DH), NAV, SYM, QWERTY, FN, EXT
+# ==============================================================================
+
+layout:
+  keys:
+    # --- Row 1: Function / Media row (13 keys) ---
+    - {x: 0, y: 0, w: 1}
+    - {x: 1, y: 0, w: 1}
+    - {x: 2, y: 0, w: 1}
+    - {x: 3, y: 0, w: 1}
+    - {x: 4, y: 0, w: 1}
+    - {x: 5, y: 0, w: 1}
+    - {x: 6, y: 0, w: 1}
+    - {x: 7, y: 0, w: 1}
+    - {x: 8, y: 0, w: 1}
+    - {x: 9, y: 0, w: 1}
+    - {x: 10, y: 0, w: 1}
+    - {x: 11, y: 0, w: 1}
+    - {x: 12, y: 0, w: 1}
+
+    # --- Row 2: Number row (14 keys) ---
+    - {x: 0, y: 1, w: 1}
+    - {x: 1, y: 1, w: 1}
+    - {x: 2, y: 1, w: 1}
+    - {x: 3, y: 1, w: 1}
+    - {x: 4, y: 1, w: 1}
+    - {x: 5, y: 1, w: 1}
+    - {x: 6, y: 1, w: 1}
+    - {x: 7, y: 1, w: 1}
+    - {x: 8, y: 1, w: 1}
+    - {x: 9, y: 1, w: 1}
+    - {x: 10, y: 1, w: 1}
+    - {x: 11, y: 1, w: 1}
+    - {x: 12, y: 1, w: 1}
+    - {x: 13, y: 1, w: 1.5}
+
+    # --- Row 3: Tab / Top alpha row (13 keys) ---
+    - {x: 0, y: 2, w: 1.5}
+    - {x: 1.5, y: 2, w: 1}
+    - {x: 2.5, y: 2, w: 1}
+    - {x: 3.5, y: 2, w: 1}
+    - {x: 4.5, y: 2, w: 1}
+    - {x: 5.5, y: 2, w: 1}
+    - {x: 6.5, y: 2, w: 1}
+    - {x: 7.5, y: 2, w: 1}
+    - {x: 8.5, y: 2, w: 1}
+    - {x: 9.5, y: 2, w: 1}
+    - {x: 10.5, y: 2, w: 1}
+    - {x: 11.5, y: 2, w: 1}
+    - {x: 12.5, y: 2, w: 1}
+
+    # --- Row 4: Caps / Home row (13 keys) ---
+    - {x: 0, y: 3, w: 1.75}
+    - {x: 1.75, y: 3, w: 1}
+    - {x: 2.75, y: 3, w: 1}
+    - {x: 3.75, y: 3, w: 1}
+    - {x: 4.75, y: 3, w: 1}
+    - {x: 5.75, y: 3, w: 1}
+    - {x: 6.75, y: 3, w: 1}
+    - {x: 7.75, y: 3, w: 1}
+    - {x: 8.75, y: 3, w: 1}
+    - {x: 9.75, y: 3, w: 1}
+    - {x: 10.75, y: 3, w: 1}
+    - {x: 11.75, y: 3, w: 1}
+    - {x: 12.75, y: 3, w: 1.25}
+
+    # --- Row 5: Shift / Bottom alpha row (13 keys) ---
+    - {x: 0, y: 4, w: 1.25}
+    - {x: 1.25, y: 4, w: 1}
+    - {x: 2.25, y: 4, w: 1}
+    - {x: 3.25, y: 4, w: 1}
+    - {x: 4.25, y: 4, w: 1}
+    - {x: 5.25, y: 4, w: 1}
+    - {x: 6.25, y: 4, w: 1}
+    - {x: 7.25, y: 4, w: 1}
+    - {x: 8.25, y: 4, w: 1}
+    - {x: 9.25, y: 4, w: 1}
+    - {x: 10.25, y: 4, w: 1}
+    - {x: 11.25, y: 4, w: 1}
+    - {x: 12.25, y: 4, w: 1.75}
+
+    # --- Row 6: Thumbs row (6 keys) ---
+    - {x: 0, y: 5, w: 1.25}
+    - {x: 1.25, y: 5, w: 1.25}
+    - {x: 2.5, y: 5, w: 1.25}
+    - {x: 3.75, y: 5, w: 5.5}
+    - {x: 9.25, y: 5, w: 1.25}
+    - {x: 10.5, y: 5, w: 1.25}
+
+layers:
+  # ============================================================================
+  # LAYER 0: BASE (Colemak-DH)
+  # ============================================================================
+  base:
+    # Row 1 (F-row)
+    - Esc
+    - {t: '🔅', h: F1}
+    - {t: '🔆', h: F2}
+    - F3
+    - F4
+    - F5
+    - F6
+    - {t: '⏮', h: F7}
+    - {t: '⏯', h: F8}
+    - {t: '⏭', h: F9}
+    - {t: '🔇', h: F10}
+    - {t: '🔉', h: F11}
+    - {t: '🔊', h: F12}
+
+    # Row 2 (Number row)
+    - {t: '`', s: '~'}
+    - {t: '1', s: '!'}
+    - {t: '2', s: '@'}
+    - {t: '3', s: '#'}
+    - {t: '4', s: '$'}
+    - {t: '5', s: '%'}
+    - {t: '6', s: '^'}
+    - {t: '7', s: '&'}
+    - {t: '8', s: '*'}
+    - {t: '9', s: '('}
+    - {t: '0', s: ')'}
+    - {t: '-', s: '_'}
+    - {t: '=', s: '+'}
+    - {t: CapsWord, h: Caps}
+
+    # Row 3 (Top row)
+    - Tab
+    - q
+    - w
+    - f
+    - p
+    - b
+    - j
+    - {t: l, h: '↑'}
+    - {t: u, h: '↓'}
+    - {t: y, h: '←'}
+    - {t: ';', s: ':', h: '→'}
+    - {t: '[', s: '{'}
+    - {t: ']', s: '}'}
+
+    # Row 4 (Home row)
+    - ⌫
+    - {t: a, h: Ctrl}
+    - {t: r, h: Alt}
+    - {t: s, h: Meta}
+    - {t: t, h: Shift}
+    - {t: g, h: Esc}
+    - {t: m, h: Esc}
+    - {t: n, h: Shift}
+    - {t: e, h: Meta}
+    - {t: i, h: Alt}
+    - {t: o, h: Ctrl}
+    - {t: "'", s: '"'}
+    - Enter
+
+    # Row 5 (Bottom row)
+    - {t: Shift, type: sticky}
+    - {t: '`', s: '~'}
+    - x
+    - c
+    - d
+    - v
+    - z
+    - k
+    - h
+    - {t: ',', s: '<'}
+    - {t: '.', s: '>'}
+    - {t: '/', s: '?'}
+    - {t: Shift, type: sticky}
+
+    # Row 6 (Thumbs)
+    - Ctrl
+    - Meta
+    - {t: Alt, h: NAV}
+    - {t: Space, h: SYM}
+    - AltGr
+    - Meta
+
+  # ============================================================================
+  # LAYER 1: NAV (Hold Return / Alt)
+  # ============================================================================
+  nav:
+    # Row 1
+    - {t: '▽', type: trans}
+    - F1
+    - F2
+    - F3
+    - F4
+    - F5
+    - F6
+    - F7
+    - F8
+    - F9
+    - F10
+    - F11
+    - F12
+
+    # Row 2
+    - {t: '▽', type: trans}
+    - PgUp
+    - PgDn
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+    # Row 3
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - '-'
+    - KP 7
+    - KP 8
+    - KP 9
+    - '-'
+    - KP *
+    - {t: '▽', type: trans}
+
+    # Row 4
+    - {t: '▽', type: trans}
+    - Ctrl
+    - Alt
+    - Meta
+    - Shift
+    - {t: '▽', type: trans}
+    - KP 0
+    - KP 4
+    - KP 5
+    - KP 6
+    - '+'
+    - '='
+    - {t: '▽', type: trans}
+
+    # Row 5
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - Ctrl+X
+    - Ctrl+C
+    - Ctrl+D
+    - Ctrl+V
+    - Ctrl+Z
+    - Enter
+    - KP 1
+    - KP 2
+    - KP 3
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+    # Row 6
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+  # ============================================================================
+  # LAYER 2: SYM (Hold Space)
+  # ============================================================================
+  sym:
+    # Row 1
+    - {t: '▽', type: trans}
+    - F1
+    - F2
+    - F3
+    - F4
+    - F5
+    - F6
+    - F7
+    - F8
+    - F9
+    - F10
+    - F11
+    - F12
+
+    # Row 2
+    - {t: TOG QW, type: toggle}
+    - '!'
+    - '@'
+    - '#'
+    - '$'
+    - '%'
+    - '^'
+    - '&'
+    - '*'
+    - '('
+    - ')'
+    - '-'
+    - '+'
+    - {t: '▽', type: trans}
+
+    # Row 3 (Top row)
+    - {t: '▽', type: trans}
+    - '@'
+    - '#'
+    - '|'
+    - '~'
+    - '`'
+    - '+'
+    - '{'
+    - '}'
+    - "'"
+    - '"'
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+    # Row 4 (Home row)
+    - {t: '▽', type: trans}
+    - '!'
+    - '%'
+    - '$'
+    - '^'
+    - '&'
+    - '-'
+    - '('
+    - ')'
+    - '='
+    - '_'
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+    # Row 5 (Bottom row)
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - '<'
+    - '>'
+    - '?'
+    - '\'
+    - '*'
+    - '['
+    - ']'
+    - '/'
+    - '\'
+    - {t: '▽', type: trans}
+
+    # Row 6
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: FN, h: FN}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+  # ============================================================================
+  # LAYER 3: QWERTY (Toggle via SYM tog_qw)
+  # ============================================================================
+  colemak:
+    # Row 1
+    - Esc
+    - {t: '🔅', h: F1}
+    - {t: '🔆', h: F2}
+    - F3
+    - F4
+    - F5
+    - F6
+    - {t: '⏮', h: F7}
+    - {t: '⏯', h: F8}
+    - {t: '⏭', h: F9}
+    - {t: '🔇', h: F10}
+    - {t: '🔉', h: F11}
+    - {t: '🔊', h: F12}
+
+    # Row 2
+    - {t: '`', s: '~'}
+    - {t: '1', s: '!'}
+    - {t: '2', s: '@'}
+    - {t: '3', s: '#'}
+    - {t: '4', s: '$'}
+    - {t: '5', s: '%'}
+    - {t: '6', s: '^'}
+    - {t: '7', s: '&'}
+    - {t: '8', s: '*'}
+    - {t: '9', s: '('}
+    - {t: '0', s: ')'}
+    - {t: '-', s: '_'}
+    - {t: '=', s: '+'}
+    - {t: CapsWord, h: Caps}
+
+    # Row 3
+    - Tab
+    - q
+    - w
+    - e
+    - r
+    - t
+    - y
+    - u
+    - i
+    - o
+    - p
+    - {t: '[', s: '{'}
+    - {t: ']', s: '}'}
+
+    # Row 4
+    - ⌫
+    - {t: a, h: Ctrl}
+    - {t: s, h: Alt}
+    - {t: d, h: Meta}
+    - {t: f, h: Shift}
+    - {t: g, h: Esc}
+    - {t: h, h: '↑'}
+    - {t: j, h: '↓'}
+    - {t: k, h: '←'}
+    - {t: l, h: '→'}
+    - {t: ';', s: ':', h: Shift}
+    - {t: "'", s: '"'}
+    - Enter
+
+    # Row 5
+    - {t: Shift, type: sticky}
+    - {t: '`', s: '~'}
+    - z
+    - x
+    - c
+    - v
+    - b
+    - n
+    - m
+    - {t: ',', s: '<'}
+    - {t: '.', s: '>'}
+    - {t: '/', s: '?'}
+    - {t: Shift, type: sticky}
+
+    # Row 6
+    - Ctrl
+    - Meta
+    - {t: Alt, h: NAV}
+    - {t: Space, h: SYM}
+    - AltGr
+    - Meta
+
+  # ============================================================================
+  # LAYER 4: FN / Media (Hold Space + Return)
+  # ============================================================================
+  fn:
+    # Row 1
+    - {t: '▽', type: trans}
+    - F1
+    - F2
+    - F3
+    - F4
+    - F5
+    - F6
+    - F7
+    - F8
+    - {t: TO EXT, type: toggle}
+    - F10
+    - F11
+    - F12
+
+    # Row 2
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+    # Row 3
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - '🔅'
+    - '🔆'
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+    # Row 4
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - '⏯'
+    - '🔇'
+    - '🔉'
+    - '🔊'
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+    # Row 5
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - '⏮'
+    - '⏭'
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+    # Row 6
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+  # ============================================================================
+  # LAYER 5: EXT (Special / Full Navigation)
+  # ============================================================================
+  ext:
+    # Row 1
+    - {t: BASE, type: toggle}
+    - PrtSc
+    - ScrollLock
+    - Pause
+    - NumLock
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - Insert
+    - Home
+    - PgUp
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+    # Row 2
+    - {t: '▽', type: trans}
+    - F11
+    - F12
+    - Menu
+    - Caps
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - Delete
+    - End
+    - PgDn
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+    # Row 3
+    - {t: '▽', type: trans}
+    - Ctrl
+    - Alt
+    - Meta
+    - Shift
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - '←'
+    - '↓'
+    - '↑'
+    - '→'
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+    # Row 4
+    - {t: '▽', type: trans}
+    - Ctrl+Z
+    - Ctrl+X
+    - Ctrl+C
+    - Ctrl+V
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - Ctrl+F
+    - Meta+L
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+
+    # Row 5
+    - '🔇'
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: BASE, type: toggle}
+
+    # Row 6
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}
+    - {t: BASE, type: toggle}
+    - {t: '▽', type: trans}
+    - {t: '▽', type: trans}

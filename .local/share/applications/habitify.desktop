@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Habitify
+Comment=Habitify
+Exec=omarchy-launch-webapp https://app.habitify.me/journal/all-habits
+Terminal=false
+Type=Application
+StartupNotify=true
